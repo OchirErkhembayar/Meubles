@@ -1,0 +1,6 @@
+<% @furnitures.each do |furniture| %>
+  <h3>name: - <%= furniture.name %></h3>
+  <h3>price: - <%= furniture.price %></h3>
+  <h3>location: - <%= furniture.location %></h3>
+  <%= link_to "more info", furniture_path(furniture), class: "btn btn-flat" %>
+<% end %>
