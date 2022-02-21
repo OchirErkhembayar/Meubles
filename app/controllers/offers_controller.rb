@@ -3,7 +3,6 @@ class OffersController < ApplicationController
     @offers = Offer.all
   end
 
-
   def show
     @offer = Offer.find(params[:furniture_id])
     @offer = Offer.new
