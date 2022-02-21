@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-  has_many :furnitures
+  belongs_to :furniture
   validates :name, presence: true, length: { minimum: 3 }
 end

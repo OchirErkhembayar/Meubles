@@ -3,13 +3,10 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :furnitures do
-    collection do
-      get :my_furniture
-    end
     resources :offers, only: %i[new create]
   end
+  get '/my_furnitures', to: "furnitures#my_furnitures"
 
-  resources :offers, only: %i[index show edit update destroy] do
-    get :my_offers
-  end
+  resources :offers, only: %i[index show edit update destroy]
+  get '/my_offers', to: "offers#my_offers"
 end
