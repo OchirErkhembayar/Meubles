@@ -11,3 +11,4 @@ class CreateFurnitures < ActiveRecord::Migration[6.1]
     end
   end
 end
+20220221153956
