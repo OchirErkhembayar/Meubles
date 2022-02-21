@@ -5,7 +5,7 @@ class OffersController < ApplicationController
 
 
   def show
-    @offer = Offer.find(params[:id])
+    @offer = Offer.find(params[:furniture_id])
     @offer = Offer.new
   end
 end
