@@ -14,6 +14,8 @@ user_array = []
 
 30.times do
   user = User.new(
+    first_name: Faker::JapaneseMedia::Naruto.character.split(' ').first,
+    last_name: Faker::JapaneseMedia::Naruto.character.split(' ').last,
     email: "#{Faker::Name.first_name}@doop.com",
     password: 123123
   )
