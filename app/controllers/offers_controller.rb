@@ -21,6 +21,10 @@ class OffersController < ApplicationController
     redirect_to '/offers'
   end
 
+  def update
+
+  end
+
   private
 
   def set_offer
