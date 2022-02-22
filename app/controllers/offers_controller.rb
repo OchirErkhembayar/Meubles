@@ -17,8 +17,11 @@ class OffersController < ApplicationController
     @offer = Offer.new(set_offer)
     @offer.user_id = current_user.id
     @offer.furniture_id = params[:furniture_id]
-    @offer.save!
-    redirect_to offers_path
+    if @offer.save
+      redirect_to offers_path
+    else
+      render :new
+    end
   end
 
   def destroy

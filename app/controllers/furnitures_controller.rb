@@ -18,16 +18,22 @@ class FurnituresController < ApplicationController
   def create
     @furniture = Furniture.new(set_furniture)
     @furniture.user_id = current_user.id
-    @furniture.save!
-    redirect_to '/furnitures'
+    if @furniture.save
+      redirect_to '/furnitures'
+    else
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
-    @furniture.update(set_furniture)
-    redirect_to furnitures_path(@furniture)
+    if @furniture.update(set_furniture)
+      redirect_to furnitures_path(@furniture)
+    else
+      render :edit
+    end
   end
 
   def destroy
