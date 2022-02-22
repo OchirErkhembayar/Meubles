@@ -1,0 +1,5 @@
+<% @offers.each do |offer| %>
+  <% if offer.user_id == current_user.id %>
+    <h3><%= offer.furniture.name %></h3>
+  <% end %>
+<% end %>

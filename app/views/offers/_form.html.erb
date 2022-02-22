@@ -1,0 +1,12 @@
+ <div class="container">
+    <%= simple_form_for [ @list, @bookmark ] do |f| %>
+      <%= f.input :start_date, as: :date, html5: true %>
+      <div class="form-group mb-3">
+        <%= f.input :, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.association :movie, class: "form-control" %>
+      </div>
+      <%= f.submit "Submit bookmark", class: "btn btn-primary mb-3" %>
+    <% end %>
+</div>
