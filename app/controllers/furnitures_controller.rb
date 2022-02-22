@@ -1,11 +1,10 @@
 class FurnituresController < ApplicationController
-
+  before_action :find_furniture, only: %i[show]
   def index
     @furnitures = Furniture.all
   end
 
   def show
-    @furniture = Furniture.find(params[:id])
   end
 
   def new
@@ -23,5 +22,9 @@ class FurnituresController < ApplicationController
 
   def set_furniture
     params.require(:furniture).permit(:name, :price, :location, :category_id)
+  end
+
+  def find_furniture
+    @furniture = Furniture.find(params[:id])
   end
 end
