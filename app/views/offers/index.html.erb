@@ -1,6 +1,13 @@
 
 <div class="container mt-3">
   <h2 class="border-bottom pb-3" style="text-align: center;">Offers</h2>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+    </div>
+  </nav>
   <div class="row">
     <div class="col-sm col-xs-12">
       <h3 class="border-bottom pb-1" style="text-align: center;">Your requests</h3>
@@ -242,45 +249,80 @@
   </div>
 </div>
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="container">
+          <h3 class="border-bottom pb-1" style="text-align: center;">Your requests</h3>
+      <div class="row row-cols-3">
+          <% @offers.reverse.each do |offer| %>
+            <div class="col">
+              <% if (offer.user_id == current_user.id && offer.accepted == false) %>
+                <% seller = User.find(offer.furniture.user_id) %>
+                <div class="card-product my-3" style="height: 100px;">
+                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                  <div class="card-product-infos d-flex justify-content-between">
+                  <% if offer.start_date > Time.new %>
+                    <div class="details">
+                      <h4><%= offer.furniture.name.capitalize %></h3>
+                      <%# MODAL BUTTON %>
+                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                        More info
+                      </button>
+                      <%# MODAL %>
+                      <div style="height: 700px;" class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="card-trip">
+                                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <div class="card-trip-infos">
+                                  <div>
+                                    <h2><%= offer.furniture.name.capitalize %></h2>
+                                    <p>Renting from: <%= seller.first_name %> - contact: <%= seller.email %></p>
+                                    <br>
+                                    <p class="border-bottom">Description</p>
+                                    <p class="ps-1 pt-1"><%= offer.furniture.description %></p>
+                                    <br>
+                                    <p class="border-bottom">Location</p>
+                                    <p class="ps-1 pt-1"><%= offer.furniture.location %></p>
+                                    <br>
+                                    <div class="align-items-bottom">
+                                    <p>Start date: <%= offer.start_date %></p>
+                                    <p>End date: <%= offer.end_date %></p>
+                                    </div>
+                                  </div>
+                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <%# MODAL %>
+                      <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                    </div>
+                  <% else %>
+                    <div style="padding: 0px;" class="card-product-infos">
+                      <h4>Order has expired</h4>
+                      <%= link_to 'Remove', offer_path(offer), method: :delete, class: "btn btn-secondary" %>
+                    </div>
+                  <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>
-</div>
-
-
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Testing</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">.iooij</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">.jibberish</div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
 </div>
