@@ -4,6 +4,11 @@ class OffersController < ApplicationController
     @offers = Offer.all
   end
 
+  def show
+    @offer = Offer.find(params[:furniture_id])
+    @offer = Offer.new
+  end
+
   def new
     @offer = Offer.new
   end
@@ -14,11 +19,6 @@ class OffersController < ApplicationController
     @offer.furniture_id = params[:furniture_id]
     @offer.save!
     redirect_to '/offers'
-  end
-
-  def show
-    @offer = Offer.find(params[:furniture_id])
-    @offer = Offer.new
   end
 
   private
