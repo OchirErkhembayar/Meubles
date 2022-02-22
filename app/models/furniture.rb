@@ -5,4 +5,5 @@ class Furniture < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3 }
   validates :price, presence: true
   validates :location, presence: true
+  validates :description, presence: true, length: { minimum: 3 }
 end
