@@ -32,6 +32,10 @@ class FurnituresController < ApplicationController
     redirect_to furnitures_path
   end
 
+  def my_furnitures
+    @furnitures = Furniture.all.where("user_id = ?", current_user.id)
+  end
+
   private
 
   def set_furniture
