@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-sm col-xs-12">
       <h3 class="border-bottom pb-1" style="text-align: center;">Your requests</h3>
-      <% @offers.each do |offer| %>
+      <% @offers.reverse.each do |offer| %>
         <% if (offer.user_id == current_user.id && offer.accepted == false) %>
           <% seller = User.find(offer.furniture.user_id) %>
           <div class="card-product my-3" style="height: 200px;">
@@ -36,7 +36,7 @@
     </div>
     <div class="col-sm col-xs-12">
       <h3 class="border-bottom pb-1" style="text-align: center;">Your Offers</h3>
-      <% @offers.each do |offer| %>
+      <% @offers.reverse.each do |offer| %>
         <% if (offer.furniture.user_id == current_user.id && offer.accepted == false) %>
           <div class="card-product my-3" style="height: 200px;">
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
@@ -68,7 +68,7 @@
     </div>
     <div class="col-sm col-xs-12">
       <h3 class="border-bottom pb-1" style="text-align: center;">Sold Items</h3>
-      <% @offers.each do |offer| %>
+      <% @offers.reverse.each do |offer| %>
         <% seller = User.find(offer.furniture.user_id) %>
         <% if (offer.furniture.user_id == current_user.id && offer.accepted == true) %>
           <div class="card-product my-3" style="height: 200px;">
@@ -90,7 +90,7 @@
         <% end %>
       <% end %>
       <h3 class="border-bottom pb-1" style="text-align: center;">Bought Items</h3>
-      <% @offers.each do |offer| %>
+      <% @offers.reverse.each do |offer| %>
         <% seller = User.find(offer.furniture.user_id) %>
         <% if (offer.user_id == current_user.id && offer.accepted == true) %>
           <div class="card-product my-3" style="height: 200px;">
