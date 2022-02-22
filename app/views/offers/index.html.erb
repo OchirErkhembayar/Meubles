@@ -1,0 +1,17 @@
+<% @offers.each do |offer| %>
+  <% if offer.user_id == current_user.id %>
+    <% seller = User.find(offer.furniture.user_id) %>
+    <h3>name: - <%= offer.furniture.name %></h3>
+    <h3>price: - <%= offer.furniture.price %></h3>
+    <h3>location: - <%= offer.furniture.location %></h3>
+    <h3>buying from: - <%= seller.email %></h3>
+  <% end %>
+<% end %>
+
+<div class="card-product">
+  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+  <div class="card-product-infos">
+    <h2>Product name</h2>
+    <p>Product description with <strong>relevant info</strong> only.</p>
+  </div>
+</div>

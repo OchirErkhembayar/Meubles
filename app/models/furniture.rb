@@ -1,5 +1,5 @@
 class Furniture < ApplicationRecord
-  has_many :categories
+  belongs_to :category
   has_many :offers, dependent: :destroy
   has_many :users, through: :offers
   validates :name, presence: true, length: { minimum: 3 }
