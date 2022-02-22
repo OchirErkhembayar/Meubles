@@ -1,0 +1,12 @@
+<ul>
+  <% @furnitures.each do |furniture| %>
+    <li>
+      <ul>
+        <%= furniture.name %>
+        <li><%=  furniture.category.name%> </li>
+        <li><%= furniture.price %> </li>
+        <li><%=  furniture.location%> </li>
+      </ul>
+    </li>
+  <% end %>
+</ul>

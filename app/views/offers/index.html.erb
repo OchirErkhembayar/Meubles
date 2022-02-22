@@ -1,17 +1,116 @@
-<% @offers.each do |offer| %>
-  <% if offer.user_id == current_user.id %>
-    <% seller = User.find(offer.furniture.user_id) %>
-    <h3>name: - <%= offer.furniture.name %></h3>
-    <h3>price: - <%= offer.furniture.price %></h3>
-    <h3>location: - <%= offer.furniture.location %></h3>
-    <h3>buying from: - <%= seller.email %></h3>
-  <% end %>
-<% end %>
 
-<div class="card-product">
-  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
-  <div class="card-product-infos">
-    <h2>Product name</h2>
-    <p>Product description with <strong>relevant info</strong> only.</p>
+<div class="container mt-3">
+  <h2 class="border-bottom pb-3" style="text-align: center;">Offers</h2>
+  <div class="row">
+    <div class="col-sm col-xs-12">
+      <h3 class="border-bottom pb-1" style="text-align: center;">Your requests</h3>
+      <% @offers.each do |offer| %>
+        <% if (offer.user_id == current_user.id && offer.accepted == false) %>
+          <% seller = User.find(offer.furniture.user_id) %>
+          <div class="card-product my-3" style="height: 200px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+            <% if offer.start_date > Time.new %>
+              <div class="details">
+                <h4><%= offer.furniture.name.capitalize %></h3>
+                <h5>£<%= offer.furniture.price %></h5>
+                <p>location: - <%= offer.furniture.location %></p>
+                <p>start date: <%= offer.start_date %></p>
+                <p>end date: <%= offer.end_date %></p>
+                <p>owner email: - <%= seller.email %></p>
+              </div>
+              <%= link_to 'Delete offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+            <% else %>
+              <div class="card-product-infos d-flex justify-content-between">
+                <div class="details">
+                  <h4>The start date of the offer has passed.</h4>
+                  <p>You can delete this offer</p>
+                </div>
+                <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm col-xs-12">
+      <h3 class="border-bottom pb-1" style="text-align: center;">Your Offers</h3>
+      <% @offers.each do |offer| %>
+        <% if (offer.furniture.user_id == current_user.id && offer.accepted == false) %>
+          <div class="card-product my-3" style="height: 200px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <% if offer.start_date > Time.new %>
+              <div class="card-product-infos d-flex justify-content-between">
+                <div class="details">
+                  <h4><%= offer.furniture.name.capitalize %></h3>
+                  <h5>£<%= offer.furniture.price %></h5>
+                  <p>location: - <%= offer.furniture.location %></p>
+                  <p>start date: <%= offer.start_date %></p>
+                  <p>end date: <%= offer.end_date %></p>
+                  <p>buyer email: - <%= offer.user.email %></p>
+                </div>
+                <%= link_to "accept offer", accept_offer_path(offer), method: :put %>
+                <%= link_to 'decline offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+              </div>
+            <% else %>
+              <div class="card-product-infos d-flex justify-content-between">
+                <div class="details">
+                  <h4>The start date of the offer has passed</h4>
+                  <p>You can delete this offer</p>
+                </div>
+                <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm col-xs-12">
+      <h3 class="border-bottom pb-1" style="text-align: center;">Sold Items</h3>
+      <% @offers.each do |offer| %>
+        <% seller = User.find(offer.furniture.user_id) %>
+        <% if (offer.furniture.user_id == current_user.id && offer.accepted == true) %>
+          <div class="card-product my-3" style="height: 200px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+              <div class="details">
+                <h4><%= offer.furniture.name.capitalize %></h3>
+                <h5>£<%= offer.furniture.price %></h5>
+                <p>location: - <%= offer.furniture.location %></p>
+                <p>start date: <%= offer.start_date %></p>
+                <p>end date: <%= offer.end_date %></p>
+                <p>buyer email: - <%= offer.user.email %></p>
+                <% if offer.end_date <= Time.now %>
+                  <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <h3 class="border-bottom pb-1" style="text-align: center;">Bought Items</h3>
+      <% @offers.each do |offer| %>
+        <% seller = User.find(offer.furniture.user_id) %>
+        <% if (offer.user_id == current_user.id && offer.accepted == true) %>
+          <div class="card-product my-3" style="height: 200px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+              <div class="details">
+                <h4><%= offer.furniture.name.capitalize %></h3>
+                <h5>£<%= offer.furniture.price %></h5>
+                <p>location: - <%= offer.furniture.location %></p>
+                <p>start date: <%= offer.start_date %></p>
+                <p>end date: <%= offer.end_date %></p>
+                <p>owner email: - <%= seller.email %></p>
+                <% if offer.end_date <= Time.now %>
+                  <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   end
   get '/my_furnitures', to: "furnitures#my_furnitures"
 
-  resources :offers, only: %i[index show edit update destroy]
-  get '/my_offers', to: "offers#my_offers"
+  resources :offers, only: %i[index show edit update] do
+    member do
+      put :accept
+      delete :destroy
+    end
+  end
 end
