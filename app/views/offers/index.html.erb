@@ -12,7 +12,6 @@
 
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade" id="nav-bought" role="tabpanel" aria-labelledby="nav-bought-tab">
-    <h3 class="border-bottom my-3 pb-3" style="text-align: center;">Bought Items</h3>
       <div class="container">
         <div class="row d-flex flex-wrap align-items-start">
           <% @offers.reverse.each do |offer| %>
@@ -38,7 +37,11 @@
                             </div>
                             <div class="modal-body">
                               <div class="card-trip" style="height: 400px;">
-                                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% if offer.photo.key.attached? %>
+                                  <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                                <% else %>
+                                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% end %>
                                 <div class="card-trip-infos">
                                   <div>
                                     <h2><%= offer.furniture.name.capitalize %></h2>
@@ -78,8 +81,6 @@
       </div>
   </div>
   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
-    <h3 class="border-bottom my-3 pb-3" style="text-align: center;">Your requests</h3>
     <div class="container">
       <div class="row d-flex flex-wrap align-items-start">
           <% @offers.reverse.each do |offer| %>
@@ -106,7 +107,11 @@
                             </div>
                             <div class="modal-body">
                               <div class="card-trip">
-                                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% if offer.furniture.photo.attached? %>
+                                  <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                                <% else %>
+                                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% end %>
                                 <div class="card-trip-infos">
                                   <div>
                                     <h2><%= offer.furniture.name.capitalize %></h2>
@@ -152,7 +157,6 @@
     </div>
   </div>
   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-    <h3 class="border-bottom my-3 pb-3" style="text-align: center;">Your Offers</h3>
     <div class="container">
       <div class="row d-flex flex-wrap align-items-start">
           <% @offers.reverse.each do |offer| %>
@@ -178,7 +182,11 @@
                             </div>
                             <div class="modal-body">
                               <div class="card-trip" style="height: 400px;">
-                                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% if offer.furniture.photo.attached? %>
+                                  <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                                <% else %>
+                                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% end %>
                                 <div class="card-trip-infos">
                                   <div>
                                     <h2><%= offer.furniture.name.capitalize %></h2>
@@ -219,7 +227,6 @@
     </div>
   </div>
   <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-    <h3 class="border-bottom my-3 pb-3" style="text-align: center;">Sold Items</h3>
       <div class="container">
         <div class="row d-flex flex-wrap align-items-start"></div>
           <% @offers.reverse.each do |offer| %>
@@ -245,7 +252,11 @@
                             </div>
                             <div class="modal-body">
                               <div class="card-trip" style="height: 400px;">
-                                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% if offer.furniture.photo.attached? %>
+                                  <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                                <% else %>
+                                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                                <% end %>
                                 <div class="card-trip-infos">
                                   <div>
                                     <h2><%= offer.furniture.name.capitalize %></h2>
