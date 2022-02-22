@@ -14,12 +14,34 @@
               <div class="details">
                 <h4><%= offer.furniture.name.capitalize %></h3>
                 <h5>£<%= offer.furniture.price %></h5>
-                <p>location: - <%= offer.furniture.location %></p>
                 <p>start date: <%= offer.start_date %></p>
                 <p>end date: <%= offer.end_date %></p>
                 <p>owner email: - <%= seller.email %></p>
+                <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                  Launch demo modal
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="card-trip">
+                        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                        <div class="card-trip-infos">
+                          <div>
+                            <h2><%= offer.furniture.name %></h2>
+                            <p>Short description here!</p>
+                          </div>
+                          <h2 class="card-trip-pricing">£99.99</h2>
+                          <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
               </div>
-              <%= link_to 'Delete offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+              <%= link_to 'Delete offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none; height: 3rem;" %>
             <% else %>
               <div class="card-product-infos d-flex justify-content-between">
                 <div class="details">
@@ -49,6 +71,29 @@
                   <p>start date: <%= offer.start_date %></p>
                   <p>end date: <%= offer.end_date %></p>
                   <p>buyer email: - <%= offer.user.email %></p>
+                  <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=offer.id%>">
+                  Launch demo modal
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
                 </div>
                 <%= link_to "accept offer", accept_offer_path(offer), method: :put %>
                 <%= link_to 'decline offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
@@ -81,6 +126,29 @@
                 <p>start date: <%= offer.start_date %></p>
                 <p>end date: <%= offer.end_date %></p>
                 <p>buyer email: - <%= offer.user.email %></p>
+                <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=offer.id%>">
+                  Launch demo modal
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
                 <% if offer.end_date <= Time.now %>
                   <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
                 <% end %>
@@ -103,6 +171,29 @@
                 <p>start date: <%= offer.start_date %></p>
                 <p>end date: <%= offer.end_date %></p>
                 <p>owner email: - <%= seller.email %></p>
+                <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<%=offer.id%>">
+                  Launch demo modal
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
                 <% if offer.end_date <= Time.now %>
                   <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
                 <% end %>
@@ -111,6 +202,31 @@
           </div>
         <% end %>
       <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>
