@@ -1,7 +1,7 @@
 class OffersController < ApplicationController
   before_action :find_furniture, only: %i[new]
   def index
-    @offers = Offer.all
+    @offers = Offer.all.where('user_id = ?', current_user.id)
   end
 
   def show

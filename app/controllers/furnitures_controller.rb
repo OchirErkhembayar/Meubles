@@ -16,7 +16,7 @@ class FurnituresController < ApplicationController
     @furniture = Furniture.new(set_furniture)
     @furniture.user_id = current_user.id
     @furniture.save!
-    redirect_to 'furnitures'
+    redirect_to '/furnitures'
   end
 
   private
