@@ -25,7 +25,17 @@
                 <div class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
-                      <p><%= offer.furniture.name %></p>
+                      <div class="card-trip">
+                        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                        <div class="card-trip-infos">
+                          <div>
+                            <h2><%= offer.furniture.name %></h2>
+                            <p>Short description here!</p>
+                          </div>
+                          <h2 class="card-trip-pricing">£99.99</h2>
+                          <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
