@@ -16,6 +16,9 @@
       <div class="form-group mb-3">
         <%= f.input :price, class: "form-control" %>
       </div>
+       <div class="form-group mb-3">
+        <%= f.input :photo, as: :file, class: "form-control" %>
+      </div>
       <%= f.submit "Submit furniture", class: "btn btn-primary mb-3 w-100" %>
     <% end %>
 </div>
