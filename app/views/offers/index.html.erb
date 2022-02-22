@@ -4,7 +4,7 @@
     <div class="col-sm">
       <h3>Your requests</h3>
       <% @offers.each do |offer| %>
-        <% if offer.user_id == current_user.id %>
+        <% if (offer.user_id == current_user.id && offer.accepted == false) %>
           <% seller = User.find(offer.furniture.user_id) %>
           <div class="card-product my-3">
             <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
@@ -23,6 +23,22 @@
     </div>
     <div class="col-sm">
       <h3>Your Offers</h3>
+      <% @offers.each do |offer| %>
+        <% if (offer.furniture.user_id == current_user.id && offer.accepted == false) %>
+          <div class="card-product my-3">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+              <div class="details">
+                <h4>name: - <%= offer.furniture.name.capitalize %></h3>
+                <h5>price: - <%= offer.furniture.price %></h5>
+                <p>location: - <%= offer.furniture.location %></p>
+                <p>buyer email: - <%= offer.user.email %></p>
+              </div>
+              <%= link_to "cancel offer", "#" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-sm">
       <h3>Accepted Offers</h3>
