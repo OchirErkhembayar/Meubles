@@ -1,12 +1,28 @@
-<ul>
-  <% @furnitures.each do |furniture| %>
-    <li>
-      <ul>
-        <%= furniture.name %>
-        <li><%=  furniture.category.name%> </li>
-        <li><%= furniture.price %> </li>
-        <li><%=  furniture.location%> </li>
-      </ul>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <% @furnitures.reverse.each do |furniture| %>
+      <div class="col-3">
+        <div class="card d-flex justify-content-around" style ="width: 18rem;">
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" class="card-img-top"/>
+          <div class="row justify-content-between">
+            <div class="col-6">
+              <h5 class="card-title"><%= furniture.name %></h5>
+            </div>
+            <div class="col-6">
+              <h5 class="card-title">$<%= furniture.price %></h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p class="card-subtitle"><%= furniture.location %></p>
+            </div>
+            <div class="col-6">
+              <p class="card-subtitle"><%= furniture.category.name %></p>
+            </div>
+          </div>
+          <div class="row"><%= link_to "more info", furniture_path(furniture), class: "btn btn-primary btn-sm" %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
