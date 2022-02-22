@@ -7,6 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+require 'open-uri'
+
+Offer.destroy_all
+Furniture.destroy_all
+Category.destroy_all
+User.destroy_all
 
 puts "creating 30 users"
 
@@ -56,6 +62,8 @@ furniture_array = []
     category_id: category_array.sample.id,
     description: "A wonderful piece of furniture wow! Such amazing quality! Such cheap price! Amazing! Wow!"
   )
+  file = URI.open('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Majestic_Twilight.jpg/340px-Majestic_Twilight.jpg')
+  furniture.photo.attach(io: file, filename: 'sunset.png', content_type: 'image/png')
   user_array.reject { |user| user.id == user_id }
   furniture.save!
   furniture_array << furniture
