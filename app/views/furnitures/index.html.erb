@@ -3,7 +3,7 @@
     <% @furnitures.reverse.each do |furniture| %>
       <div class="col-3">
         <div class="card d-flex justify-content-around" style ="width: 18rem;">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" class="card-img-top"/>
+          <%= cl_image_tag furniture.photo.key, height:300, width: 400, crop: :fill %>
           <div class="row justify-content-between">
             <div class="col-6">
               <h5 class="card-title"><%= furniture.name %></h5>
