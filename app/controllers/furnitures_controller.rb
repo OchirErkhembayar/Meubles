@@ -1,5 +1,5 @@
 class FurnituresController < ApplicationController
-  before_action :find_furniture, only: %i[show]
+  before_action :find_furniture, only: %i[show edit update destroy]
   def index
     @furnitures = Furniture.all
   end
@@ -16,6 +16,20 @@ class FurnituresController < ApplicationController
     @furniture.user_id = current_user.id
     @furniture.save!
     redirect_to '/furnitures'
+  end
+
+  def edit
+  end
+
+  def update
+    @furniture.update(set_furniture)
+    redirect_to furnitures_path(@furniture)
+  end
+
+  def destroy
+    @furniture.destroy
+
+    redirect_to furnitures_path
   end
 
   private
