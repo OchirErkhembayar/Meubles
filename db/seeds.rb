@@ -51,7 +51,8 @@ furniture_array = []
     location: Faker::Address.full_address,
     price: (1..100).to_a.sample,
     user_id: user_id,
-    category_id: category_array.sample.id
+    category_id: category_array.sample.id,
+    description: "A wonderful piece of furniture wow! Such amazing quality! Such cheap price! Amazing! Wow!"
   )
   user_array.reject { |user| user.id == user_id }
   furniture.save!
