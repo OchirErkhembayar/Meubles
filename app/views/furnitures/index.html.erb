@@ -3,7 +3,11 @@
     <% @furnitures.reverse.each do |furniture| %>
       <div class="col-3">
         <div class="card d-flex justify-content-around" style ="width: 18rem;">
+          <% if furniture.photo.attached?  %>
           <%= cl_image_tag furniture.photo.key, height:300, width: 400, crop: :fill %>
+          <% else %>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Majestic_Twilight.jpg/340px-Majestic_Twilight.jpg" >
+          <% end %>
           <div class="row justify-content-between">
             <div class="col-6">
               <h5 class="card-title"><%= furniture.name %></h5>
