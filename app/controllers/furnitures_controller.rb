@@ -5,6 +5,12 @@ class FurnituresController < ApplicationController
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
     else
       @furnitures = Furniture.all
+      # @markers = @furnitures.geocoded.map do |furniture|
+      # {
+      #   lat: furniture.latitude,
+      #   long: furniture.longitude
+      # }
+      # end
     end
   end
 
