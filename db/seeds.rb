@@ -22,7 +22,7 @@ user_array = []
   user = User.new(
     first_name: Faker::JapaneseMedia::Naruto.character.split(' ').first,
     last_name: Faker::JapaneseMedia::Naruto.character.split(' ').last,
-    email: "#{Faker::Name.first_name}@doop.com",
+    email: Faker::Internet.email,
     password: 123123
   )
   user.save!

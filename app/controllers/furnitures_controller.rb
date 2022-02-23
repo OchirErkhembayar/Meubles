@@ -1,7 +1,11 @@
 class FurnituresController < ApplicationController
   before_action :find_furniture, only: %i[show edit update destroy]
   def index
-    @furnitures = Furniture.all
+    if params[:query]
+      @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
+    else
+      @furnitures = Furniture.all
+    end
   end
 
   def show
@@ -14,16 +18,22 @@ class FurnituresController < ApplicationController
   def create
     @furniture = Furniture.new(set_furniture)
     @furniture.user_id = current_user.id
-    @furniture.save!
-    redirect_to '/furnitures'
+    if @furniture.save
+      redirect_to '/furnitures'
+    else
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
-    @furniture.update(set_furniture)
-    redirect_to furnitures_path(@furniture)
+    if @furniture.update(set_furniture)
+      redirect_to furnitures_path(@furniture)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -39,7 +49,7 @@ class FurnituresController < ApplicationController
   private
 
   def set_furniture
-    params.require(:furniture).permit(:name, :price, :location, :category_id, :description, photos: [])
+    params.require(:furniture).permit(:name, :price, :location, :category_id, :description, :photo)
   end
 
   def find_furniture
