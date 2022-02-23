@@ -1,4 +1,3 @@
-
 <div class="container mt-3">
   <h2 class="border-bottom pb-3" style="text-align: center;">Offers</h2>
   <nav>
@@ -16,13 +15,14 @@
         <div class="row d-flex flex-wrap align-items-start">
           <% @offers.reverse.each do |offer| %>
             <% seller = User.find(offer.furniture.user_id) %>
-            <% if (offer.user_id == current_user.id && offer.accepted == true) %>
-              <div class="col-12 col-sm-6 col-lg-4">
-                <div class="card-product my-3" style="height: 100px;">
+            <% if (offer.user_id == current_user.id && offer.accepted == true && offer.paid == true) %>
+              <div class="col-12 col-lg-4">
+                <div class="card-product my-3" style="height: 200px;">
                   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
                   <div class="card-product-infos d-flex justify-content-between">
                     <div class="details">
-                      <h4><%= offer.furniture.name.capitalize %></h3>
+                      <h4><%= offer.furniture.name.capitalize %></h4>
+                      <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                       <%# MODAL BUTTON %>
                       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
                         More info
@@ -37,7 +37,7 @@
                             </div>
                             <div class="modal-body">
                               <div class="card-trip" style="height: 400px;">
-                                <% if offer.photo.key.attached? %>
+                                <% if offer.furniture.photo.key %>
                                   <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
                                 <% else %>
                                   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
@@ -56,7 +56,7 @@
 
                                     <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
@@ -84,10 +84,10 @@
     <div class="container">
       <div class="row d-flex flex-wrap align-items-start">
           <% @offers.reverse.each do |offer| %>
-              <% if (offer.user_id == current_user.id && offer.accepted == false) %>
-              <div class="col-12 col-sm-6 col-lg-4">
+              <% if (offer.user_id == current_user.id && (offer.accepted == false || offer.paid == false)) %>
+              <div class="col-12 col-lg-4">
                 <% seller = User.find(offer.furniture.user_id) %>
-                <div class="card-product my-3" style="height: 100px;">
+                <div class="card-product my-3" style="height: 200px;">
                   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
                   <div class="card-product-infos d-flex justify-content-between">
                   <% if offer.start_date > Time.new %>
@@ -97,6 +97,9 @@
                       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
                         More info
                       </button>
+                      <% if offer.accepted == true %>
+                        <%= link_to 'Pay', paid_offer_path(offer), method: :put, class: "btn btn-secondary m-1" %>
+                      <% end %>
                       <%# MODAL %>
                       <div style="height: 700px;" class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
@@ -128,19 +131,23 @@
                                     <p>End date: <%= offer.end_date %></p>
                                     </div>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                              <% if offer.accepted == false %>
+                                <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                              <% else %>
+                                <%= link_to 'Pay', paid_offer_path(offer), method: :put, class: "btn btn-secondary" %>
+                              <% end %>
                             </div>
                           </div>
                         </div>
                       </div>
                       <%# MODAL %>
-                      <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                      <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary m-1" %>
                     </div>
                   <% else %>
                     <div style="padding: 0px;" class="card-product-infos">
@@ -160,18 +167,22 @@
     <div class="container">
       <div class="row d-flex flex-wrap align-items-start">
           <% @offers.reverse.each do |offer| %>
-            <% if (offer.furniture.user_id == current_user.id && offer.accepted == false) %>
-              <div class="col-12 col-sm-6 col-lg-4">
-                <div class="card-product my-3" style="height: 100px;">
+            <% if (offer.furniture.user_id == current_user.id && (offer.accepted == false || offer.paid == false)) %>
+              <div class="col-12 col-lg-4">
+                <div class="card-product my-3" style="height: 200px;">
                   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
                   <% if offer.start_date > Time.new %>
                     <div class="card-product-infos">
                       <div class="details">
                         <h4><%= offer.furniture.name.capitalize %></h3>
                         <%# MODAL BUTTON %>
-                      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
-                        More info - Accept/Decline
-                      </button>
+                      <% if offer.accepted == false %>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                          More info - Accept/Decline
+                        </button>
+                      <% else %>
+                        <h6>Accepted, awaiting payment</h6>
+                      <% end %>
                       <%# MODAL %>
                       <div class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable">
@@ -198,14 +209,18 @@
                                     <p>End date: <%= offer.end_date %></p>
                                     </div>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <%= link_to "accept offer", accept_offer_path(offer), method: :put, class: "btn btn-secondary" %>
-                              <%= link_to 'decline offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", class: "btn btn-secondary" %>
+                              <% if offer.accepted == false %>
+                                <%= link_to "accept offer", accept_offer_path(offer), method: :put, class: "btn btn-secondary" %>
+                                <%= link_to 'decline offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", class: "btn btn-secondary" %>
+                              <% else %>
+                                <h6 class="btn btn-secondary">Accepted, awaiting payment</h6>
+                              <% end %>
                             </div>
                           </div>
                         </div>
@@ -231,13 +246,14 @@
         <div class="row d-flex flex-wrap align-items-start"></div>
           <% @offers.reverse.each do |offer| %>
             <% seller = User.find(offer.furniture.user_id) %>
-            <% if (offer.furniture.user_id == current_user.id && offer.accepted == true) %>
-              <div class="col-12 col-sm-6 col-lg-4">
-                <div class="card-product my-3" style="height: 100px;">
+            <% if (offer.furniture.user_id == current_user.id && offer.accepted == true && offer.paid == true) %>
+              <div class="col-12 col-lg-4">
+                <div class="card-product my-3" style="height: 200px;">
                   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
                   <div class="card-product-infos d-flex justify-content-between">
                     <div class="details">
                       <h4><%= offer.furniture.name.capitalize %></h3>
+                      <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                       <%# MODAL BUTTON %>
                       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
                         More info
@@ -271,7 +287,7 @@
 
                                     <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>

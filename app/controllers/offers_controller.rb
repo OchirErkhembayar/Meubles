@@ -37,6 +37,19 @@ class OffersController < ApplicationController
     redirect_to offers_path
   end
 
+  def paid
+    @offer = Offer.find(params[:id])
+    price = (@offer.furniture.price * ((@offer.end_date - @offer.start_date).to_i.fdiv(7))).round(2)
+    if @offer.user.balance >= price.to_f
+      @offer.user.balance -= price.to_f
+      @offer.paid = true
+      @offer.save
+      redirect_to offers_path
+    else
+      redirect_to offers_path
+    end
+  end
+
   private
 
   def set_offer
