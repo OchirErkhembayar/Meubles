@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do
       put :accept
       delete :destroy
+      put :paid
     end
   end
 
