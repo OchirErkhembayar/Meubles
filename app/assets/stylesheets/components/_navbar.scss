@@ -39,13 +39,14 @@ i{
 
 
 .navbar-lewagon {
-  justify-content: space-between;
+  justify-content: center;
   background: rgb(230, 230, 230);
 
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
+
 }
 
 .navbar-lewagon .navbar-brand img {
@@ -71,7 +72,7 @@ i{
   display: flex;
   flex-direction: column ;
   align-items: center;
-  flex-grow: 3;
+  justify-content: center;
 }
 
 .nav-title {
@@ -91,7 +92,7 @@ i{
 }
 
 .navbar-toggler {
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 .navbar-light .navbar-nav .nav-link {
