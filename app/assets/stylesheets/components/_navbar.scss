@@ -1,6 +1,47 @@
+
+.searchbox{
+  top: 80%;
+  left: 80%;
+  transform: translate(5%,3%);
+}
+.searchinput {
+  padding: 40px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 4px solid #8B62A6;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 18px;
+  color: #8B62A6;
+  outline: none;
+  transition: .5s;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.searchbox:hover input{
+  width: 350px;
+  background: gb(230, 230, 230);
+  border-radius: 10px;
+}
+i{
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(-50%,-50%);
+  font-size: 26px;
+  color:  #8B62A6;
+  transition: .2s;
+}
+.searchbox:hover i{
+  opacity: 0;
+  z-index: -1;
+}
+
+
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: rgb(230, 230, 230);
+
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -8,5 +49,46 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 50px;
+  align-items: center;
+
+}
+
+#login-btn {
+  color: white !important;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: #8B62A6;
+  transition: background 0.3s ease;
+
+}
+
+#login-btn:hover {
+  background: #ac7ace;
+  color: white;
+}
+.nav-texts {
+  display: flex;
+  flex-direction: column ;
+  align-items: center;
+  flex-grow: 3;
+}
+
+.nav-title {
+  font-family: 'Josefin Sans', sans-serif;
+  color: #8B62A6 !important;
+}
+
+.nav-title-small {
+  color: #8B62A6;
+  text-align: center;
+
+}
+
+.navbar-toggler {
+  flex-grow: 1;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgb(255, 255, 255);
 }
