@@ -1,7 +1,7 @@
 class OffersController < ApplicationController
   before_action :find_furniture, only: %i[new]
   def index
-    @offers = Offer.all.where('user_id = ?', current_user.id)
+    @offers = Offer.all
   end
 
   def show
@@ -17,8 +17,24 @@ class OffersController < ApplicationController
     @offer = Offer.new(set_offer)
     @offer.user_id = current_user.id
     @offer.furniture_id = params[:furniture_id]
-    @offer.save!
-    redirect_to '/offers'
+    if @offer.save
+      redirect_to offers_path
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    @offer = Offer.find(params[:id])
+    @offer.destroy
+    redirect_to offers_path
+  end
+
+  def accept
+    @offer = Offer.find(params[:id])
+    @offer.accepted = true
+    @offer.save
+    redirect_to offers_path
   end
 
   private

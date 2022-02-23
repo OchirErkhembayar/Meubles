@@ -1,0 +1,248 @@
+  <div class="row">
+    <div class="col-sm col-xs-12">
+      <h3 class="border-bottom pb-1" style="text-align: center;">Your requests</h3>
+      <% @offers.reverse.each do |offer| %>
+        <% if (offer.user_id == current_user.id && offer.accepted == false) %>
+          <% seller = User.find(offer.furniture.user_id) %>
+          <div class="card-product my-3" style="height: 100px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+            <% if offer.start_date > Time.new %>
+              <div class="details">
+                <h4><%= offer.furniture.name.capitalize %></h3>
+                <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                  More info
+                </button>
+                <%# MODAL %>
+                <div style="height: 700px;" class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-trip">
+                          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                          <div class="card-trip-infos">
+                            <div>
+                              <h2><%= offer.furniture.name.capitalize %></h2>
+                              <p>Renting from: <%= seller.first_name %> - contact: <%= seller.email %></p>
+                              <br>
+                              <p class="border-bottom">Description</p>
+                              <p class="ps-1 pt-1"><%= offer.furniture.description %></p>
+                              <br>
+                              <p class="border-bottom">Location</p>
+                              <p class="ps-1 pt-1"><%= offer.furniture.location %></p>
+                              <br>
+                              <div class="align-items-bottom">
+                              <p>Start date: <%= offer.start_date %></p>
+                              <p>End date: <%= offer.end_date %></p>
+                              </div>
+                            </div>
+                            <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
+                <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+              </div>
+            <% else %>
+              <div style="padding: 0px;" class="card-product-infos">
+                <h4>Order has expired</h4>
+                <%= link_to 'Remove', offer_path(offer), method: :delete, class: "btn btn-secondary" %>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm col-xs-12">
+      <h3 class="border-bottom pb-1" style="text-align: center;">Your Offers</h3>
+      <% @offers.reverse.each do |offer| %>
+        <% if (offer.furniture.user_id == current_user.id && offer.accepted == false) %>
+          <div class="card-product my-3" style="height: 100px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <% if offer.start_date > Time.new %>
+              <div class="card-product-infos">
+                <div class="details">
+                  <h4><%= offer.furniture.name.capitalize %></h3>
+                  <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                  More info - Accept/Decline
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-trip" style="height: 400px;">
+                          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                          <div class="card-trip-infos">
+                            <div>
+                              <h2><%= offer.furniture.name.capitalize %></h2>
+                              <p><%= offer.user.first_name %> is requesting to rent this item - contact: <%= offer.user.email %></p>
+                              <br>
+                              <div class="align-items-bottom">
+                              <p>Start date: <%= offer.start_date %></p>
+                              <p>End date: <%= offer.end_date %></p>
+                              </div>
+                            </div>
+                            <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <%= link_to "accept offer", accept_offer_path(offer), method: :put, class: "btn btn-secondary" %>
+                        <%= link_to 'decline offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", class: "btn btn-secondary" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
+                </div>
+              </div>
+            <% else %>
+              <div class="card-product-infos">
+                <h4>Order has expired</h4>
+                <%= link_to 'Remove', offer_path(offer), method: :delete, class: "btn btn-secondary" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-sm col-xs-12">
+      <h3 class="border-bottom pb-1" style="text-align: center;">Sold Items</h3>
+      <% @offers.reverse.each do |offer| %>
+        <% seller = User.find(offer.furniture.user_id) %>
+        <% if (offer.furniture.user_id == current_user.id && offer.accepted == true) %>
+          <div class="card-product my-3" style="height: 100px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+              <div class="details">
+                <h4><%= offer.furniture.name.capitalize %></h3>
+                <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                  More info
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Sold Item: <%= offer.furniture.name.capitalize %></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-trip" style="height: 400px;">
+                          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                          <div class="card-trip-infos">
+                            <div>
+                              <h2><%= offer.furniture.name.capitalize %></h2>
+                              <p><%= offer.user.first_name %> has rented this item</p>
+                              <p>Contact: <%= offer.user.email %></p>
+                              <br>
+                              <div class="align-items-bottom">
+                              <p>Start date: <%= offer.start_date %></p>
+                              <p>End date: <%= offer.end_date %></p>
+                              </div>
+                              <br>
+
+                              <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
+                            </div>
+                            <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
+                <% if offer.end_date <= Time.now %>
+                  <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <h3 class="border-bottom pb-1" style="text-align: center;">Bought Items</h3>
+      <% @offers.reverse.each do |offer| %>
+        <% seller = User.find(offer.furniture.user_id) %>
+        <% if (offer.user_id == current_user.id && offer.accepted == true) %>
+          <div class="card-product my-3" style="height: 100px;">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+            <div class="card-product-infos d-flex justify-content-between">
+              <div class="details">
+                <h4><%= offer.furniture.name.capitalize %></h3>
+                <%# MODAL BUTTON %>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
+                  More info
+                </button>
+                <%# MODAL %>
+                <div class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="card-trip" style="height: 400px;">
+                          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                          <div class="card-trip-infos">
+                            <div>
+                              <h2><%= offer.furniture.name.capitalize %></h2>
+                              <p>You rented from: <%= seller.first_name %></p>
+                              <p>Contact: <%= seller.email %></p>
+                              <br>
+                              <div class="align-items-bottom">
+                              <p>Start date: <%= offer.start_date %></p>
+                              <p>End date: <%= offer.end_date %></p>
+                              </div>
+                              <br>
+
+                              <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
+                            </div>
+                            <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <%# MODAL %>
+                <% if offer.end_date <= Time.now %>
+                  <%= link_to 'delete', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "my-button", style: "text-decoration: none;" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,21 @@
-<h3><%= @furniture.name %></h3>
+<% if @furniture.user_id == current_user.id %>
+<h3><%= link_to @furniture.name, edit_furniture_path(@furniture) %></h3>
+<% else %>
+  <h3><%=  @furniture.name %></h3>
+<% end %>
 <h4>Price - <%= @furniture.price %></h4>
 <h4>Location - <%= @furniture.location %></h4>
 <h4>Category - <%= @furniture.category.name %></h4>
 
+
+
 <% if @furniture.user_id != current_user.id %>
   <%= link_to "Make an Offer",  new_furniture_offer_path(@furniture) %>
+<% end %>
+
+<% if @furniture.user_id == current_user.id %>
+  <%= link_to "Delete #{@furniture.name}",
+            furniture_path(@furniture),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
 <% end %>
