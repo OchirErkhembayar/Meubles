@@ -29,7 +29,7 @@
               <div class="col-12 col-sm-6 col-lg-4">
                 <div class="card-trip my-2 mb-3" style="height: 400px;">
                   <% if furniture.photo.attached? %>
-                    <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height 270px;" %>
+                    <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height: 270px;" %>
                   <% else %>
                     <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
                   <% end %>
