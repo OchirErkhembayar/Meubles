@@ -56,7 +56,7 @@
 
                                     <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
@@ -128,7 +128,7 @@
                                     <p>End date: <%= offer.end_date %></p>
                                     </div>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
@@ -198,7 +198,7 @@
                                     <p>End date: <%= offer.end_date %></p>
                                     </div>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
@@ -271,7 +271,7 @@
 
                                     <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= offer.furniture.price %></h2>
+                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
                               </div>
                             </div>
