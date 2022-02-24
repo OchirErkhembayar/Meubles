@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   def show
+    @review = Review.new
     @user = current_user
+    @reviews = Review.where('user_id = ?', @user.id)
     @furnitures = Furniture.where('user_id = ?', current_user.id)
   end
 
