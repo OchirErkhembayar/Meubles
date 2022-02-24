@@ -28,6 +28,8 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:id])
     @offer.furniture.rented = false
     @offer.furniture.save
+    @offer.save
+    @offer.save
     @offer.destroy
     redirect_to offers_path
   end
