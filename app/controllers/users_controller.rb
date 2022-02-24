@@ -2,9 +2,10 @@ class UsersController < ApplicationController
 
   def show
     @review = Review.new
-    @user = current_user
+    @user = User.find(params[:id])
     @reviews = Review.where('user_id = ?', @user.id)
-    @furnitures = Furniture.where('user_id = ?', current_user.id)
+    @average_rating = @reviews.sum { |review| review.rating }.fdiv(@reviews.count).round(1)
+    @furnitures = Furniture.where('user_id = ?', @user.id)
   end
 
   def edit

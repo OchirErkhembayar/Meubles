@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
     @user = User.find(params[:user_id])
     @reviews = @user.reviews
     @review.user = @user
+    @furnitures = Furniture.all
     if @review.save
       redirect_to user_path(@user)
     else

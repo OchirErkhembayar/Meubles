@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-12 col-sm-4 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">Furnitures I listed!</h3>
-      <% @furnitures.reverse.each do |furniture| %>
+      <% @furnitures.reverse.first(3).each do |furniture| %>
           <% if furniture.user_id == current_user.id %>
-            <div class="card-trip my-2" style="height: 400px;">
+            <div class="card-trip my-2 mb-4" style="height: 400px;">
               <% if furniture.photo.attached? %>
                 <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height: 270px;" %>
               <% else %>
@@ -31,18 +31,17 @@
       <div class="card-trip" style="height: 300px; background-color: rgba( 240, 240, 240, 100%);">
         <div class="card-trip-infos p-4">
           <div>
-            <h3><%= @user.first_name %></h3>
+            <h3><%= @user.first_name.capitalize %>&nbsp;<%= @user.last_name.capitalize %></h3>
             <p><%= @user.about_me %></p>
             <h6 class="pt-3">Contact Details</h6>
             <p><%= @user.email %></p>
             <h6 class="pt-3">Renting since</h6>
             <p><%= @user.created_at %></p>
-            <h6 class="pt-3">Average Review score:</h6>
+            <h6 class="pt-3">Average Review score: <i class="fas fa-star" style="color: gold;"></i> <%= @average_rating %>/5</h6>
           </div>
         </div>
       </div>
-      <h3 class="border-bottom py-3" style="text-align: center;">Reviews</h3>
-      <h3 class="text-center">Submit a review</h3>
+      <h3 class="text-center mt-3">Submit a review</h3>
       <%= simple_form_for [ @user, @review ] do |f| %>
         <div class="form-group mb-3">
           <%= f.input :rating, class: "form-control", placeholder: "0-5" %>
@@ -52,14 +51,12 @@
         </div>
         <%= f.submit "Submit review", class: "btn btn-primary mb-3 w-100" %>
       <% end %>
-      <h2 class="text-center">Reviews</h2>
+      <h3 class="text-center">Reviews</h3>
       <% @reviews.each do |review| %>
         <div class="card-product mb-4">
           <div class="card-product-infos ps-3">
             <div class="d-flex border-bottom">
-              <% review.rating.to_i.times do %>
-                <h4><i class="fas fa-star" style="color: gold;"></i></h4>
-              <% end %>
+              <h5><%= review.rating %></h5>
             </div>
             <p class="review-text mt-3 ms-2"><%= review.content %></p>
           </div>
