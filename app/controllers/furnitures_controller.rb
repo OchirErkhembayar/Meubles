@@ -14,7 +14,7 @@ class FurnituresController < ApplicationController
           lat: furniture.latitude,
           long: furniture.longitude,
           info_window: render_to_string(partial: "info_window", locals: { furniture: furniture }),
-          image_url: helpers.asset_url("cara1.jpg")
+          image_url: helpers.asset_url("logo.png")
         }
       end
     end
