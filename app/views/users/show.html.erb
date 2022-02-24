@@ -29,7 +29,7 @@
     </div>
     <div class="col-12 col-sm-8 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">More about me</h3>
-      <div class="card-trip" style="height: 300px; background-color: rgba( 240, 240, 240, 100%);">
+      <div class="card-trip" style="height: auto; background-color: rgba( 240, 240, 240, 100%);">
         <div class="card-trip-infos p-4">
           <div>
             <% if @user.first_name && @user.last_name %>
@@ -67,16 +67,14 @@
         <h6>You need to rent from <%= @user.first_name %> in order to review them!</h6>
       <% end %>
       <h3 class="text-center">Reviews</h3>
+              <i class="fas fa-star" id="review-icon" style="color: gold;"></i>
       <% @reviews.each do |review| %>
-        <div class="card-product mb-4">
+        <div class="card-product mb-4" style="height: auto;">
           <div class="card-product-infos ps-3">
-            <div class="d-flex border-bottom">
-            <div>
-              <h4><i class="fas fa-star" style="color: gold; position: absolute;"></i></h4>
-            </div>
+            <div class="d-flex border-bottom justify-content-left">
               <h5><%= review.rating %></h5>
             </div>
-            <p class="review-text mt-3 ms-2"><%= review.content %></p>
+            <p class="review-text mt-3 ms-2" style="font-size: 15px;"><%= review.content %></p>
           </div>
         </div>
       <% end %>
