@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_02_24_120916) do
+=======
+ActiveRecord::Schema.define(version: 2022_02_24_112314) do
+>>>>>>> 98a2016f99f78c8663277a36cc54b00c3e73c596
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +62,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_120916) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
-    t.boolean "rented"
+    t.boolean "rented", default: false
     t.float "latitude"
     t.float "longitude"
     t.index ["category_id"], name: "index_furnitures_on_category_id"
