@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_135429) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
-    t.boolean "rented"
+    t.boolean "rented", default: false
     t.float "latitude"
     t.float "longitude"
     t.index ["category_id"], name: "index_furnitures_on_category_id"
