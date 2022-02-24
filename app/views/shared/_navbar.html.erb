@@ -26,7 +26,7 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <p class="nav-link">Hello, <%= current_user.first_name ? current_user.first_name.capitalize : current_user.email %></p>
-          <p class="nav-link">Balance: <%= current_user.balance %></p>
+          <p class="nav-link">Balance: £<%= current_user.balance %></p>
           <li class="nav-item active">
             <%= link_to "All Furniture", furnitures_path , class: "nav-link" %>
           </li>
