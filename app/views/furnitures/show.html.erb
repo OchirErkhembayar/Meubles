@@ -19,3 +19,8 @@
             method: :delete,
             data: { confirm: "Are you sure?" } %>
 <% end %>
+
+<%= form_tag orders_path do %>
+  <%= hidden_field_tag '@furniture_id', @furniture.id %>
+  <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+<% end %>

@@ -9,4 +9,5 @@ class Furniture < ApplicationRecord
   validates :price, presence: true
   validates :location, presence: true
   validates :description, presence: true, length: { minimum: 3 }
+  monetize :price_cents
 end
