@@ -8,7 +8,7 @@
         <%= f.text_area :description, class: "form-control", placeholder: "Enter a short description of your item" %>
       </div>
       <div class="form-group mb-3">
-        <%= f.input :location, input_html: { data: { geocoder_target: "location" }, class: "d-none" }, wrapper_html: { data: { controller: "geocoder", geocoder_api_key_value: ENV['MAPBOX_API_KEY'] } }, class: "form-control" %>
+        <%= f.input :location, input_html: { data: { geocoder_target: "location" } }, wrapper_html: { data: { controller: "geocoder", geocoder_api_key_value: ENV['MAPBOX_API_KEY'] } } %>
       </div>
       <div class="form-group mb-3">
         <%= f.association :category, class: "form-control" %>

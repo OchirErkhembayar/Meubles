@@ -40,19 +40,31 @@
             <p><%= @user.email %></p>
             <h6 class="pt-3">Renting since</h6>
             <p><%= @user.created_at %></p>
-            <h6 class="pt-3">Average Review score: <i class="fas fa-star" style="color: gold;"></i> <%= @average_rating %>/5</h6>
+            <% if @reviews.count > 0 %>
+              <h6 class="pt-3">Average Review score: <i class="fas fa-star" style="color: gold;"></i> <%= @average_rating %>/5</h6>
+            <% else %>
+              <h6 class="pt-3">Average Review score: <i class="fas fa-star" style="color: gold;"></i> No reviews yet! </h6>
+            <% end %>
           </div>
         </div>
       </div>
       <h3 class="text-center mt-3">Submit a review</h3>
-      <%= simple_form_for [ @user, @review ] do |f| %>
-        <div class="form-group mb-3">
-          <%= f.input :rating, class: "form-control", placeholder: "0-5" %>
+      <% if current_user.user_history.include? @user.id.to_s %>
+        <%= simple_form_for [ @user, @review ] do |f| %>
+          <div class="form-group mb-3">
+            <%= f.input :rating, class: "form-control", placeholder: "0-5" %>
+          </div>
+          <div class="form-group mb-3" rows="3">
+            <%= f.text_area :content, class: "form-control", placeholder: "Write here" %>
+          </div>
+          <%= f.submit "Submit review", class: "btn btn-primary mb-3 w-100" %>
+        <% end %>
+      <% elsif current_user == @user %>
+        <div class="d-flex justify-content-center">
+          <h6 class="m-1">Obviously you wouldn't review yourself, <%= current_user.first_name %>...</h6>
         </div>
-        <div class="form-group mb-3" rows="3">
-          <%= f.text_area :content, class: "form-control", placeholder: "Write here" %>
-        </div>
-        <%= f.submit "Submit review", class: "btn btn-primary mb-3 w-100" %>
+      <% else %>
+        <h6>You need to rent from <%= @user.first_name %> in order to review them!</h6>
       <% end %>
       <h3 class="text-center">Reviews</h3>
       <% @reviews.each do |review| %>
