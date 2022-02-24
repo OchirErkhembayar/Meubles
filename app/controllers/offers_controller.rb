@@ -48,6 +48,8 @@ class OffersController < ApplicationController
       current_user.balance -= price.to_f
       @offer.furniture.rented = true
       @offer.furniture.save
+      current_user.user_history << @offer.furniture.user_id
+      current_user.save
       @offer.paid = true
       @offer.save
       current_user.save
