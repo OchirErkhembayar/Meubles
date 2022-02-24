@@ -1,5 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
+  <div class="leftside">
     <div class="searchbox">
           <form name="search">
               <input type="text" class="searchinput" name="txt" placeholder="Search for furniture..."
@@ -7,13 +8,17 @@
           </form>
               <i class="fas fa-search"></i>
       </div>
+  </div>
     <div class="nav-texts">
-      <h1 class="nav-title">Meubles</h1>
+      <div class="d-flex" style="align-items: flex-end; justify-content: center;">
+        <%= link_to :root, class: "navbar-brand", style: "margin-bottom: 0.45rem;" do %>
+          <%= image_tag "logo.png" %>
+        <% end %>
+        <h1 class="nav-title">Meubles</h1>
+      </div>
       <h5 class="nav-slogan"> Rent furniture, the right way !</h5>
-    <%= link_to :root, class: "navbar-brand" do %>
-      <%= image_tag "logo.png" %>
-    <% end %>
     </div>
+  <div class="rightside">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -31,7 +36,7 @@
           <li class="nav-item dropdown">
             <%= image_tag "https://media.istockphoto.com/vectors/sofa-icon-vector-logo-template-vector-id1278931900?k=20&m=1278931900&s=170667a&w=0&h=mn1GByQu3U3qLbF0Ca9IIm2ivU_0fcKpi1Han-mTA9A=", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "My Furnitures", "/my_furnitures", class: "dropdown-item" %>
+              <%= link_to "My Profile", user_path(current_user), class: "dropdown-item" %>
               <%= link_to "My Offers", offers_path, class: "dropdown-item" %>
               <%= link_to "Add to balance", edit_user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
@@ -39,10 +44,11 @@
           </li>
         <% else %>
           <li class="nav-item" id="login-btn">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link-white" %>
           </li>
         <% end %>
       </ul>
     </div>
+   </div>
   </div>
 </div>

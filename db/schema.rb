@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_24_135429) do
+ActiveRecord::Schema.define(version: 2022_02_24_161055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_135429) do
     t.boolean "rented", default: false
     t.float "latitude"
     t.float "longitude"
+    t.integer "price_cents", default: 0, null: false
     t.index ["category_id"], name: "index_furnitures_on_category_id"
     t.index ["user_id"], name: "index_furnitures_on_user_id"
   end
@@ -76,6 +77,20 @@ ActiveRecord::Schema.define(version: 2022_02_24_135429) do
     t.boolean "paid", default: false
     t.index ["furniture_id"], name: "index_offers_on_furniture_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "state"
+    t.string "furnitures_sku"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "GBP", null: false
+    t.string "checkout_session_id"
+    t.bigint "user_id", null: false
+    t.bigint "furniture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["furniture_id"], name: "index_orders_on_furniture_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -99,6 +114,8 @@ ActiveRecord::Schema.define(version: 2022_02_24_135429) do
     t.string "last_name"
     t.float "balance", default: 0.0
     t.text "about_me"
+    t.integer "upvote", default: 0
+    t.text "user_history", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -109,5 +126,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_135429) do
   add_foreign_key "furnitures", "users"
   add_foreign_key "offers", "furnitures"
   add_foreign_key "offers", "users"
+  add_foreign_key "orders", "furnitures"
+  add_foreign_key "orders", "users"
   add_foreign_key "reviews", "users"
 end
