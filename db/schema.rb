@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2022_02_23_140332) do
+=======
+ActiveRecord::Schema.define(version: 2022_02_24_085509) do
+>>>>>>> 6696fda08a11acc0bc2627632df683be243ba0d2
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +62,11 @@ ActiveRecord::Schema.define(version: 2022_02_23_140332) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+<<<<<<< HEAD
     t.integer "price_cents", default: 0, null: false
+=======
+    t.boolean "rented"
+>>>>>>> 6696fda08a11acc0bc2627632df683be243ba0d2
     t.index ["category_id"], name: "index_furnitures_on_category_id"
     t.index ["user_id"], name: "index_furnitures_on_user_id"
   end
@@ -71,6 +79,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_140332) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "accepted", default: false
+    t.boolean "paid", default: false
     t.index ["furniture_id"], name: "index_offers_on_furniture_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
@@ -85,6 +94,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_140332) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_name"
     t.string "last_name"
+    t.float "balance", default: 0.0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

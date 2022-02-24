@@ -1,2 +1,154 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag("cara3.jpg", class: "d-block w-100", alt: "...") %>
+      <div class="carousel-caption d-none d-md-block">
+        <h1>At home furniture</h1>
+        <p>Everything your home deserves.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag("cara4.jpg", class: "d-block w-100", alt: "...") %>
+      <div class="carousel-caption d-none d-md-block">
+        <h1>Office Essentials</h1>
+        <p>Designs inspired by the new generation with a classic touch.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <%= image_tag("cara1.jpg", class: "d-block w-100", alt: "...") %>
+      <div class="carousel-caption d-none d-md-block">
+        <h1>Fitness</h1>
+        <p>Rent Gym Equipment, whatever your goals may be.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="container">
+  <div class="card__container">
+    <div class="card">
+      <div class="card__content">
+        <h3 class="card__header">At Home</h3>
+        <%= image_tag("furniture.png", class:"d-block w-100 card-padding", alt: "...") %>
+        <button class="card__button">See More</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__content">
+        <h3 class="card__header">Office</h3>
+         <%= image_tag("office.png", class:"d-block w-100 card-padding", alt: "...") %>
+        <button class="card__button">See More</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__content">
+        <h3 class="card__header">Fitness</h3>
+         <%= image_tag("treadmill.png", class:"d-block w-100 card-padding", alt: "...") %>
+        <button class="card__button">See more</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__content">
+        <h3 class="card__header">Appliances</h3>
+         <%= image_tag("electrical-appliances.png", class: "d-block w-100 card-padding", alt: "...") %>
+        <button class="card__button">See more</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-100">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
+                    <div class="inner">
+                        <div class="main-img"><img src="https://images.demandware.net/dw/image/v2/BBBV_PRD/on/demandware.static/-/Sites-master-catalog/default/dwb3b230d1/images/650000/652597.jpg?sfrm=jpg" alt="Category"></div>
+                        <div class="thumblist"><img src="https://content.cylindo.com/api/v2/4981/products/PURLEY-STANDARD-LARGE-CORNER-SOFA/frames/3/PURLEY-STANDARD-LARGE-CORNER-SOFA.JPG?additionalData=true&background=FFFFFF&feature=UPHOLSTERY:FABRIC__EASY_CLEAN_SOFT_AS_COTTON__CAMBRIDGE_BLUE" alt="Category"><img src="https://www.ikea.com/gb/en/images/products/ektorp-2-seat-sofa__0818544_pe774475_s5.jpg?f=s" alt="Category"></div>
+                    </div>
+                </a>
+                <div class="card-body text-center">
+                    <h4 class="card-title">Sofas</h4>
+                    <p class="text-muted">Starting from £40 per month</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
+                    <div class="inner">
+                        <div class="main-img"><img src=//5.imimg.com/data5/UT/HR/MY-5732148/inhousegym-pro-200-treadmill-500x500.jpg alt="Category"></div>
+                        <div class="thumblist"><img src="https://expertreviews.b-cdn.net/sites/expertreviews/files/styles/er_main_wide/public/2017/06/best_treadmill_-_nordictrack_x7i_incline_trainer.jpg?itok=Yx4AwHhS" alt="Category"><img src="https://www.fitnessclub24.co.uk/6006-large_default/xstairmaster-gauntlet-8g-tv-15-stepmill.jpg.pagespeed.ic.bmeHHfM2hd.webp" alt="Category"></div>
+                    </div>
+                </a>
+                <div class="card-body text-center">
+                    <h4 class="card-title">Treadmills</h4>
+                    <p class="text-muted">Starting from £50 per month</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Products</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
+                    <div class="inner">
+                        <div class="main-img"><img src="//media.4rgos.it/i/Argos/4126416_R_Z001A?w=750&h=440&qlt=70" alt="Category"></div>
+                        <div class="thumblist"><img src="//media.4rgos.it/i/Argos/2477167_R_Z001A?w=750&h=440&qlt=70" alt="Category"><img src="//cdn.shopify.com/s/files/1/0075/5407/2628/products/43710201Door1DrawerDesk_A_1016x1016.jpg?v=1630743721 2.00x" alt="Category"></div>
+                    </div>
+                </a>
+                <div class="card-body text-center">
+                    <h4 class="card-title">Desks</h4>
+                    <p class="text-muted">Starting from £9 per month</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <div class="header">
+    <h2>All the furniture you need, at the click of a button!</h2>
+    <h2>Powered by Ochir</h2>
+
+    <p>Meubles is a leading rental company with a U.K. presence. We offer furniture, appliances, and electronics on rent in the U.K at an affordable monthly fee. When you choose to rent from us instead of buying from a store, you get to use the best products in the market and still save money!</p>
+  </div>
+  <div class="row1-container">
+    <div class="box box-down cyan">
+      <h2>Rent</h2>
+      <p>Save up to 15% on your monthly rentals. Simply opt-in for advance rental payment at checkout to avail extra savings and enjoy a hassle-free experience. Remember, higher tenure equals more savings!</p>
+      <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
+    </div>
+
+    <div class="box red">
+      <h2>Sell</h2>
+      <p>Scans our talent network to create the optimal team for your project</p>
+      <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+    </div>
+
+    <div class="box box-down blue">
+      <h2>Free relocation</h2>
+      <p>Changing your house or even your city? We'll relocate your rented products for free.</p>
+      <img src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
+    </div>
+  </div>
+  <div class="row2-container">
+    <div class="box orange">
+      <h2>Finest-quality products</h2>
+      <p>Quality matters to you, and us! That's why we do a strict quality-check for every product.</p>
+      <img src="https://assets.codepen.io/2301174/icon-karma.svg" alt="">
+    </div>
+  </div>
+
+  <footer>
+  <div class="footer">
+  <div class="footer-links">
+  <div class="footer-copyright">
+    This is a comapny from Where2 Group Ltd
+  </div>
+</div>
+</footer>
