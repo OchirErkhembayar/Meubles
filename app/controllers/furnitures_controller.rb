@@ -1,5 +1,6 @@
 class FurnituresController < ApplicationController
   before_action :find_furniture, only: %i[show edit update destroy]
+
   def index
     if params[:query]
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
