@@ -24,6 +24,12 @@
           </form>
         </div>
         <div class="row d-flex flex-wrap align-items-start">
+          <div class="d-flex justify-content-center">
+            <div style="width: 100%; height: 300px;"
+              data-controller="mapbox"
+              data-mapbox-markers-value="<%= @markers.to_json %>"
+              data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+            </div>
           <% @furnitures.reverse.each do |furniture| %>
             <% if furniture.user_id != current_user.id && furniture.rented != true %>
               <div class="col-12 col-sm-6 col-lg-4">
