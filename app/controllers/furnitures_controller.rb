@@ -8,7 +8,8 @@ class FurnituresController < ApplicationController
       @furnitures = Furniture.all
 
       @furnitures_mapped = Furniture.geocoded
-      @markers = @furnitures_mapped.geocoded.map do |furniture|
+
+      @markers = @furnitures_mapped.map do |furniture|
         {
           lat: furniture.latitude,
           long: furniture.longitude,
