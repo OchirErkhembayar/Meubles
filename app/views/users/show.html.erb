@@ -26,22 +26,22 @@
           <% end %>
         <% end %>
     </div>
-    <div class="col-12 col-sm-4 p-3">
+    <div class="col-12 col-sm-8 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">More about me</h3>
-      <div class="card-trip" style="height: 500px; background-color: rgba( 230, 230, 230, 100%);">
+      <div class="card-trip" style="height: 300px; background-color: rgba( 240, 240, 240, 100%);">
         <div class="card-trip-infos p-4">
           <div>
             <h3><%= @user.first_name %></h3>
             <p><%= @user.about_me %></p>
             <h6 class="pt-3">Contact Details</h6>
             <p><%= @user.email %></p>
+            <br>
+            <h6 class="pt-3">Renting since</h6>
+            <p><%= @user.created_at %></p>
+            <h6 class="pt-3">Average Review score:</h6>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-12 col-sm-4 p-3">
-      My furniture
-      <%= @furnitures.first.name %>
     </div>
   </div>
 </div>
