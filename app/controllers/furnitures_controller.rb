@@ -66,4 +66,8 @@ class FurnituresController < ApplicationController
   def find_furniture
     @furniture = Furniture.find(params[:id])
   end
+
+  def furniture_params
+    params.require(:flat).permit(:name, :location)
+  end
 end
