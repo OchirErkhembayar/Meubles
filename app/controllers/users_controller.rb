@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @furnitures = Furniture.where('user_id = ?', current_user.id)
   end
 
   def edit

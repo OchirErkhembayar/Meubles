@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-4 p-3">
+      <h3 class="border-bottom py-3" style="text-align: center;">Furnitures I listed!</h3>
+      <% @furnitures.reverse.each do |furniture| %>
+          <% if furniture.user_id == current_user.id %>
+            <div class="card-trip my-2" style="height: 400px;">
+              <% if furniture.photo.attached? %>
+                <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height: 270px;" %>
+              <% else %>
+                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" style="height: 270px;"/>
+              <% end %>
+              <div class="card-trip-infos">
+                <div>
+                  <h2><%= furniture.name.capitalize %></h2>
+                  <p><%= furniture.description.length < 100 ? furniture.description : furniture.description.first(100) + "..." %></p>
+                </div>
+
+                <h2 class="card-trip-pricing">£<%= furniture.price %></h2>
+              </div>
+              <div class="d-flex justify-content-center align-items-end">
+                  <%= link_to "Edit", edit_furniture_path(furniture), class: "btn btn-secondary me-3" %>
+                  <%= link_to "Delete", furniture_path(furniture), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                </div>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+    <div class="col-12 col-sm-4 p-3">
+      <h3 class="border-bottom py-3" style="text-align: center;">More about me</h3>
+      <div class="card-trip" style="height: 500px; background-color: rgba( 230, 230, 230, 100%);">
+        <div class="card-trip-infos p-4">
+          <div>
+            <h3><%= @user.first_name %></h3>
+            <p><%= @user.about_me %></p>
+            <h6 class="pt-3">Contact Details</h6>
+            <p><%= @user.email %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-4 p-3">
+      My furniture
+      <%= @furnitures.first.name %>
+    </div>
+  </div>
+</div>
