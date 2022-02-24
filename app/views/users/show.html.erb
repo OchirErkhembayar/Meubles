@@ -64,15 +64,16 @@
           <h6 class="m-1">Obviously you wouldn't review yourself, <%= current_user.first_name %>...</h6>
         </div>
       <% else %>
-        <h6>You need to rent from <%= @user.first_name %> in order to review them!</h6>
+        <div class="d-flex justify-content-center">
+          <h6>You need to rent from <%= @user.first_name %> in order to review them!</h6>
+        </div>
       <% end %>
-      <h3 class="text-center">Reviews</h3>
-              <i class="fas fa-star" id="review-icon" style="color: gold;"></i>
+      <h3 class="text-center my-2">Reviews</h3>
       <% @reviews.each do |review| %>
         <div class="card-product mb-4" style="height: auto;">
           <div class="card-product-infos ps-3">
             <div class="d-flex border-bottom justify-content-left">
-              <h5><%= review.rating %></h5>
+              <h5>Rating: <%= review.rating %></h5>
             </div>
             <p class="review-text mt-3 ms-2" style="font-size: 15px;"><%= review.content %></p>
           </div>
