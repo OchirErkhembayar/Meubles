@@ -26,6 +26,10 @@ class OffersController < ApplicationController
 
   def destroy
     @offer = Offer.find(params[:id])
+    @offer.furniture.rented = false
+    @offer.furniture.save
+    @offer.save
+    @offer.save
     @offer.destroy
     redirect_to offers_path
   end
@@ -42,6 +46,8 @@ class OffersController < ApplicationController
     price = (@offer.furniture.price * ((@offer.end_date - @offer.start_date).to_i.fdiv(7))).round(2)
     if current_user.balance >= price.to_f
       current_user.balance -= price.to_f
+      @offer.furniture.rented = true
+      @offer.furniture.save
       @offer.paid = true
       @offer.save
       current_user.save
