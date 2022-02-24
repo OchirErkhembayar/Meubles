@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_24_112314) do
+ActiveRecord::Schema.define(version: 2022_02_24_135429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_112314) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
-    t.boolean "rented", default: false
+    t.boolean "rented"
     t.float "latitude"
     t.float "longitude"
     t.index ["category_id"], name: "index_furnitures_on_category_id"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2022_02_24_112314) do
     t.index ["user_id"], name: "index_offers_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.float "rating"
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -89,6 +98,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_112314) do
     t.string "first_name"
     t.string "last_name"
     t.float "balance", default: 0.0
+    t.text "about_me"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -99,4 +109,5 @@ ActiveRecord::Schema.define(version: 2022_02_24_112314) do
   add_foreign_key "furnitures", "users"
   add_foreign_key "offers", "furnitures"
   add_foreign_key "offers", "users"
+  add_foreign_key "reviews", "users"
 end

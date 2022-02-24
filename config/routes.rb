@@ -15,5 +15,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: %i[show edit update]
+  resources :users, only: %i[show edit update] do
+    resources :reviews, only: %i[new create]
+  end
+
+  resources :reviews, only: %i[destroy]
 end
