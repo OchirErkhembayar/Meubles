@@ -15,13 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
-<<<<<<< HEAD
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
   end
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
-=======
   resources :users, only: %i[show edit update]
->>>>>>> 6696fda08a11acc0bc2627632df683be243ba0d2
 end

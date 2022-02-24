@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2022_02_23_140332) do
-=======
-ActiveRecord::Schema.define(version: 2022_02_24_085509) do
->>>>>>> 6696fda08a11acc0bc2627632df683be243ba0d2
+ActiveRecord::Schema.define(version: 2022_02_24_112314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,11 +58,8 @@ ActiveRecord::Schema.define(version: 2022_02_24_085509) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
-<<<<<<< HEAD
     t.integer "price_cents", default: 0, null: false
-=======
-    t.boolean "rented"
->>>>>>> 6696fda08a11acc0bc2627632df683be243ba0d2
+    t.boolean "rented", default: false
     t.index ["category_id"], name: "index_furnitures_on_category_id"
     t.index ["user_id"], name: "index_furnitures_on_user_id"
   end
@@ -82,6 +75,20 @@ ActiveRecord::Schema.define(version: 2022_02_24_085509) do
     t.boolean "paid", default: false
     t.index ["furniture_id"], name: "index_offers_on_furniture_id"
     t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "state"
+    t.string "furnitures_sku"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "GBP", null: false
+    t.string "checkout_session_id"
+    t.bigint "user_id", null: false
+    t.bigint "furniture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["furniture_id"], name: "index_orders_on_furniture_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -105,4 +112,6 @@ ActiveRecord::Schema.define(version: 2022_02_24_085509) do
   add_foreign_key "furnitures", "users"
   add_foreign_key "offers", "furnitures"
   add_foreign_key "offers", "users"
+  add_foreign_key "orders", "furnitures"
+  add_foreign_key "orders", "users"
 end

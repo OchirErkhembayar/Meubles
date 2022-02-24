@@ -58,6 +58,7 @@ furniture_array = []
     name: Faker::House.furniture,
     location: Faker::Address.full_address,
     price: (1..100).to_a.sample,
+    price_cents: 3000,
     user_id: user_id,
     category_id: category_array.sample.id,
     description: "A wonderful piece of furniture wow! Such amazing quality! Such cheap price! Amazing! Wow!"
