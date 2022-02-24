@@ -1,16 +1,21 @@
 class FurnituresController < ApplicationController
   before_action :find_furniture, only: %i[show edit update destroy]
+
   def index
     if params[:query]
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
     else
       @furnitures = Furniture.all
-      # @markers = @furnitures.geocoded.map do |furniture|
-      # {
-      #   lat: furniture.latitude,
-      #   long: furniture.longitude
-      # }
-      # end
+
+      @furnitures_mapped = Furniture.geocoded
+      @markers = @furnitures_mapped.geocoded.map do |furniture|
+        {
+          lat: furniture.latitude,
+          long: furniture.longitude,
+          info_window: render_to_string(partial: "info_window", locals: { furniture: furniture }),
+          image_url: helpers.asset_url("cara1.jpg")
+        }
+      end
     end
   end
 
@@ -60,5 +65,9 @@ class FurnituresController < ApplicationController
 
   def find_furniture
     @furniture = Furniture.find(params[:id])
+  end
+
+  def furniture_params
+    params.require(:flat).permit(:name, :location)
   end
 end
