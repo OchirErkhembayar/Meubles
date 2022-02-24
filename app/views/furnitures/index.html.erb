@@ -1,0 +1,85 @@
+<div class="container mt-3">
+  <h2 class="border-bottom pb-3" style="text-align: center;">Furniture</h2>
+  <nav>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">All Furniture</button>
+      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">My Furniture</button>
+      <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Whatever we want!</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="container pb-4 pt-1">
+        <div class="d-flex">
+          <form class="form-inline d-flex mt-3">
+            <div class="form-group mb-2">
+              <label for="text" class="sr-only">Filter by name</label>
+              <input name="query" type="text" class="form-control" id="inputPassword2" placeholder="Filter lists">
+            </div>
+            <button type="submit" class="btn btn-secondary ms-3 mb-2">Filter</button>
+          </form>
+          <form class="form-inline d-flex mt-3">
+            <button type="submit" class="btn btn-secondary mb-2 ms-3">Refresh</button>
+          </form>
+        </div>
+        <div class="row d-flex flex-wrap align-items-start">
+          <% @furnitures.reverse.each do |furniture| %>
+            <% if furniture.user_id != current_user.id && furniture.rented != true %>
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="card-trip my-2 mb-3" style="height: 400px;">
+                  <% if furniture.photo.attached? %>
+                    <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height: 270px;" %>
+                  <% else %>
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                  <% end %>
+                  <div class="card-trip-infos">
+                    <div>
+                      <h2><%= furniture.name.capitalize %></h2>
+                      <p><%= furniture.description.length < 100 ? furniture.description : furniture.description.first(100) %></p>
+                    </div>
+                    <h2 class="card-trip-pricing">£<%=furniture.price%></h2>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <%= link_to "Create offer", new_furniture_offer_path(furniture), class: "btn btn-secondary" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="row d-flex flex-wrap align-items-start mt-3 ms-1">
+        <% @furnitures.reverse.each do |furniture| %>
+          <% if furniture.user_id == current_user.id %>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card-trip my-2" style="height: 400px;">
+                <% if furniture.photo.attached? %>
+                  <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height: 270px;" %>
+                <% else %>
+                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" style="height: 270px;"/>
+                <% end %>
+                <div class="card-trip-infos">
+                  <div>
+                    <h2><%= furniture.name.capitalize %></h2>
+                    <p><%= furniture.description.length < 100 ? furniture.description : furniture.description.first(100) + "..." %></p>
+                  </div>
+
+                  <h2 class="card-trip-pricing">£<%= furniture.price %></h2>
+                </div>
+                <div class="d-flex justify-content-center align-items-end">
+                    <%= link_to "Edit", edit_furniture_path(furniture), class: "btn btn-secondary me-3" %>
+                    <%= link_to "Delete", furniture_path(furniture), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
+                  </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <h1>Wow! So much potential here!</h1>
+    </div>
+  </div>

@@ -1,0 +1,14 @@
+<div class="container mt-5" style="width: 600px; margin: 0 auto;">
+    <%= simple_form_for(@furniture) do |f| %>
+    <div class="form-group mb-3">
+        <%= f.input :name, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.input :price, class: "form-control" %>
+      </div>
+      <div class="form-group mb-3">
+        <%= f.association :category, class: "form-control" %>
+      </div>
+      <%= f.submit "Submit changes", class: "btn btn-primary mb-3 w-100" %>
+    <% end %>
+</div>

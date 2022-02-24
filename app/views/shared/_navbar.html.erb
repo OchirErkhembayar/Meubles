@@ -1,32 +1,44 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+    <div class="searchbox">
+          <form name="search">
+              <input type="text" class="searchinput" name="txt" placeholder="Search for furniture..."
+              onmouseout="document.search.txt.value = ''">
+          </form>
+              <i class="fas fa-search"></i>
+      </div>
+    <div class="nav-texts">
+      <h1 class="nav-title">Meubles</h1>
+      <h5 class="nav-slogan"> Rent furniture, the right way !</h5>
+    <%= link_to :root, class: "navbar-brand" do %>
+      <%= image_tag "logo.png" %>
     <% end %>
-
+    </div>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
+          <p class="nav-link">Hello, <%= current_user.first_name ? current_user.first_name.capitalize : current_user.email %></p>
+          <p class="nav-link">Balance: <%= current_user.balance %></p>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "All Furniture", furnitures_path , class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
+            <%= link_to "List new furniture", new_furniture_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%= image_tag "https://media.istockphoto.com/vectors/sofa-icon-vector-logo-template-vector-id1278931900?k=20&m=1278931900&s=170667a&w=0&h=mn1GByQu3U3qLbF0Ca9IIm2ivU_0fcKpi1Han-mTA9A=", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "My Furnitures", "/my_furnitures", class: "dropdown-item" %>
+              <%= link_to "My Offers", offers_path, class: "dropdown-item" %>
+              <%= link_to "Add to balance", edit_user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
-          <li class="nav-item">
+          <li class="nav-item" id="login-btn">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
         <% end %>
