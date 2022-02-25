@@ -18,7 +18,11 @@
             <% if (offer.user_id == current_user.id && offer.accepted == true && offer.paid == true) %>
               <div class="col-12 col-lg-4">
                 <div class="card-product my-3" style="height: 200px;">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                  <% if offer.furniture.photo.key %>
+                    <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                  <% else %>
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                  <% end %>
                   <div class="card-product-infos d-flex justify-content-between">
                     <div class="details">
                       <h4><%= offer.furniture.name.capitalize %></h4>
@@ -88,7 +92,11 @@
               <div class="col-12 col-lg-4">
                 <% seller = User.find(offer.furniture.user_id) %>
                 <div class="card-product my-3" style="height: 200px;">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                  <% if offer.furniture.photo.key %>
+                    <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                  <% else %>
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                  <% end %>
                   <div class="card-product-infos d-flex justify-content-between">
                   <% if offer.start_date > Time.new %>
                     <div class="details">
@@ -171,7 +179,11 @@
             <% if (offer.furniture.user_id == current_user.id && (offer.accepted == false || offer.paid == false)) %>
               <div class="col-12 col-lg-4">
                 <div class="card-product my-3" style="height: 200px;">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                  <% if offer.furniture.photo.key %>
+                    <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                  <% else %>
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                  <% end %>
                   <% if offer.start_date > Time.new %>
                     <div class="card-product-infos">
                       <div class="details">
@@ -250,7 +262,11 @@
             <% if (offer.furniture.user_id == current_user.id && offer.accepted == true && offer.paid == true) %>
               <div class="col-12 col-lg-4">
                 <div class="card-product my-3" style="height: 200px;">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg"/>
+                  <% if offer.furniture.photo.key %>
+                    <%= cl_image_tag offer.furniture.photo.key, crop: :fill %>
+                  <% else %>
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                  <% end %>
                   <div class="card-product-infos d-flex justify-content-between">
                     <div class="details">
                       <h4><%= offer.furniture.name.capitalize %></h3>
@@ -294,7 +310,6 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Save changes</button>
                             </div>
                           </div>
                         </div>
