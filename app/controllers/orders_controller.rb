@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @order = current_user.orders.find(params[:id])
     @furniture = @order.furniture
     furniture_id = @furniture.id
-    @offer = Offer.find_by(furniture_id: furniture_id)
+    @offer = Offer.find_by(user_id: current_user.id, furniture_id: furniture_id)
     @offer.furniture.rented = true
     @offer.furniture.save
     @offer.paid = true

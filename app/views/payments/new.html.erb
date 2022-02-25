@@ -1,6 +1,12 @@
 <div class="container">
   <div class="row py-4">
-    <div class="col-md-3"><%= cl_image_tag @order.furniture.photo.key, width: '100%' %></div>
+    <div class="col-md-3">
+    <% if @order.furniture.photo.key %>
+      <%= cl_image_tag @order.furniture.photo.key, width: '100%' %>
+    <% else %>
+      <img class="w-100" src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+    <% end %>
+    </div>
     <div class="col">
       <h3>Checkout summary</h3>
       <p>Rental of <strong><%= @order.furniture.name %></strong> for <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
