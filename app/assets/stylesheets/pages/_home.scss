@@ -20,12 +20,11 @@
   padding: 8px 24px;
   border-radius: 4px;
   background: #8B62A6;
-  transition: background 0.3s ease
+  transition: background 0.3s ease;
 }
 
 .card__button:hover {
   background: #ac7ace;
-  color: white;
 }
 
 .card {
@@ -38,7 +37,6 @@
   margin: 20px;
   color: #8B62A6;
   border-radius: 7px !important;
-  border-color: #e1e7ec
 }
 
 .card__container {
@@ -59,12 +57,14 @@
 
 }
 
-.inner {
-  height: 206px;
-}
 
 .mt-100 {
   margin-top: 100px
+}
+
+.card {
+  border-radius: 7px !important;
+  border-color: #e1e7ec
 }
 
 .mb-30 {
