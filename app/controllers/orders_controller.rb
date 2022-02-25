@@ -7,9 +7,9 @@ class OrdersController < ApplicationController
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
-        name: @furniture.name,
+        name: @furniture.name.capitalize,
         images: [@furniture.photo],
-        amount: (@furniture.price_cents * ((@offer.end_date - @offer.start_date).to_i)),
+        amount: (@furniture.price_cents * ((@offer.end_date - @offer.start_date).to_i))*100,
         currency: 'gbp',
         quantity: 1
       }],
