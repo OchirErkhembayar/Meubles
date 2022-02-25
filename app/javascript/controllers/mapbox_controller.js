@@ -43,6 +43,8 @@ export default class extends Controller {
     });
   }
 
+
+
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     console.log("test")
