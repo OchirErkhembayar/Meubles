@@ -4,21 +4,21 @@ class FurnituresController < ApplicationController
   def index
     if params[:query]
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
+      @furnitures_mapped = Furniture.where('name iLIKE ?', "%#{params[:query]}%").geocoded
     elsif params[:format]
       @furnitures = Furniture.all.select { |furn| furn.user_id == params[:format].to_i }
+      @furnitures_mapped = Furniture.all.select { |furn| furn.user_id == params[:format].to_i }.geocoded
     else
       @furnitures = Furniture.all
-
       @furnitures_mapped = Furniture.geocoded
-
-      @markers = @furnitures_mapped.map do |furniture|
-        {
-          lat: furniture.latitude,
-          long: furniture.longitude,
-          info_window: render_to_string(partial: "info_window", locals: { furniture: furniture }),
-          image_url: helpers.asset_url("logo.png")
-        }
-      end
+    end
+    @markers = @furnitures_mapped.map do |furniture|
+      {
+        lat: furniture.latitude,
+        long: furniture.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { furniture: furniture }),
+        image_url: helpers.asset_url("logo.png")
+      }
     end
   end
 
