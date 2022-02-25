@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   def create
     @furniture = Furniture.find(params[:@furniture_id])
-    @offer = Offer.find_by(furniture_id: params[:@furniture_id])
+    @offer = Offer.find_by(furniture_id: params[:@furniture_id], user_id: current_user.id)
     @order = Order.create!(furniture: @furniture, furnitures_sku: @furniture.name, amount: (@furniture.price_cents * ((@offer.end_date - @offer.start_date).to_i)), state: 'pending', user: current_user)
 
     session = Stripe::Checkout::Session.create(
