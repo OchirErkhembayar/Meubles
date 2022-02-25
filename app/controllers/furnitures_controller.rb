@@ -5,7 +5,7 @@ class FurnituresController < ApplicationController
     if params[:query]
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
     elsif params[:format]
-      @furnitures = Furniture.where('name iLIKE ?', "%#{params[:format]}%")
+      @furnitures = Furniture.all.select { |furn| furn.user_id == params[:format].to_i }
     else
       @furnitures = Furniture.all
 

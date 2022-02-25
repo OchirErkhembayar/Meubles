@@ -5,7 +5,7 @@
       <% if @user == current_user %>
         <h3 class="border-bottom py-3" style="text-align: center;">Furnitures I listed!</h3>
       <% else %>
-        <h3 class="border-bottom py-3" style="text-align: center;">Furnitures <%= @user.first_name.capitalize %> listed!</h3>
+        <h3 class="text-align-center"><%= link_to "#{@user.first_name.capitalize}'s Furniture", furnitures_path(@user) , class: "nav-link border-bottom py-3" %></h3>
       <% end %>
       <% if @furnitures.first != nil %>
         <% @furnitures.reverse.first(3).each do |furniture| %>
@@ -47,7 +47,6 @@
                   <div class="d-flex justify-content-center">
                     <div>
                       <%= link_to "Create offer", new_furniture_offer_path(furniture), class: "btn btn-secondary" %>
-                      <%= link_to "Details", furniture_path(furniture), class: "btn btn-secondary" %>
                     </div>
                   </div>
                 </div>
