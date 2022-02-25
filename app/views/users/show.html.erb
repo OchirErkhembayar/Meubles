@@ -3,7 +3,8 @@
   <div class="row">
     <div class="col-12 col-sm-4 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">Furnitures I listed!</h3>
-      <% @furnitures.reverse.first(3).each do |furniture| %>
+      <% if @furnitures.first != nil %>
+        <% @furnitures.reverse.first(3).each do |furniture| %>
           <% if furniture.user_id == current_user.id %>
             <div class="card-trip my-2 mb-4" style="height: 400px;">
               <% if furniture.photo.attached? %>
@@ -16,7 +17,6 @@
                   <h2><%= furniture.name.capitalize %></h2>
                   <p><%= furniture.description.length < 100 ? furniture.description : furniture.description.first(100) + "..." %></p>
                 </div>
-
                 <h2 class="card-trip-pricing">£<%= furniture.price %></h2>
               </div>
               <div class="d-flex justify-content-center align-items-end">
@@ -24,12 +24,46 @@
                   <%= link_to "Delete", furniture_path(furniture), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
                 </div>
             </div>
+          <% else %>
+            <div class="card-trip my-2 mb-3" style="height: 400px;">
+                  <% if furniture.photo.attached? %>
+                    <%= cl_image_tag furniture.photo.key, crop: :fill, style: "height: 270px;" %>
+                  <% else %>
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+                  <% end %>
+                  <div class="card-trip-infos">
+
+                      <div>
+                        <h2><%= furniture.name.capitalize %></h2>
+                        <p><%= furniture.description.length < 100 ? furniture.description : furniture.description.first(100) %></p>
+                      </div>
+                      <h2 class="card-trip-pricing">£<%=furniture.price%></h2>
+                      <h2 class="card-trip-pricing"><%=humanized_money_with_symbol(furniture.price_cents)%></h2>
+
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <div>
+                      <%= link_to "Create offer", new_furniture_offer_path(furniture), class: "btn btn-secondary" %>
+                      <%= link_to "Details", furniture_path(furniture), class: "btn btn-secondary" %>
+                    </div>
+                  </div>
+                </div>
           <% end %>
         <% end %>
+      <% else %>
+        <% if @user == current_user %>
+          <div class="d-flex flex-column align-items-center">
+            <h6>No offers yet...</h6>
+            <%= link_to "Create your first offer!", new_furniture_path(@user), class: "btn btn-secondary w-100" %>
+          </div>
+        <% else %>
+          <h6><%= @user.first_name %> hasn't posted anything yet!</h6>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-12 col-sm-8 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">More about me</h3>
-      <div class="card-trip" style="height: 300px; background-color: rgba( 240, 240, 240, 100%);">
+      <div class="card-trip" style="height: auto; background-color: rgba( 240, 240, 240, 100%);">
         <div class="card-trip-infos p-4">
           <div>
             <% if @user.first_name && @user.last_name %>
@@ -64,19 +98,18 @@
           <h6 class="m-1">Obviously you wouldn't review yourself, <%= current_user.first_name %>...</h6>
         </div>
       <% else %>
-        <h6>You need to rent from <%= @user.first_name %> in order to review them!</h6>
+        <div class="d-flex justify-content-center">
+          <h6>You need to rent from <%= @user.first_name %> in order to review them!</h6>
+        </div>
       <% end %>
-      <h3 class="text-center">Reviews</h3>
+      <h3 class="text-center my-2">Reviews</h3>
       <% @reviews.each do |review| %>
-        <div class="card-product mb-4">
+        <div class="card-product mb-4" style="height: auto;">
           <div class="card-product-infos ps-3">
-            <div class="d-flex border-bottom">
-            <div>
-              <h4><i class="fas fa-star" style="color: gold; position: absolute;"></i></h4>
+            <div class="d-flex border-bottom justify-content-left">
+              <h5>Rating: <%= review.rating %></h5>
             </div>
-              <h5><%= review.rating %></h5>
-            </div>
-            <p class="review-text mt-3 ms-2"><%= review.content %></p>
+            <p class="review-text mt-3 ms-2" style="font-size: 15px;"><%= review.content %></p>
           </div>
         </div>
       <% end %>
