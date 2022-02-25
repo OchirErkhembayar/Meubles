@@ -26,10 +26,10 @@ class OrdersController < ApplicationController
     @furniture = @order.furniture
     furniture_id = @furniture.id
     @offer = Offer.find_by(furniture_id: furniture_id)
-    @offer.paid = true
-    @offer.save
     @offer.furniture.rented = true
     @offer.furniture.save
+    @offer.paid = true
+    @offer.save!
     redirect_to offers_path
   end
 end
