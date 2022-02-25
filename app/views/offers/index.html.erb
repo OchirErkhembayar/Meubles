@@ -26,7 +26,13 @@
                   <div class="card-product-infos d-flex justify-content-between">
                     <div class="details">
                       <h4><%= offer.furniture.name.capitalize %></h4>
-                      <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
+                      <% if offer.start_date > Date.today%>
+                        <h6>Days until start: <%= (offer.start_date - Date.today).to_i %></h6>
+                      <% elsif Date.today < offer.end_date %>
+                        <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
+                      <% else %>
+                        <h6>Rent completed</h6>
+                      <% end %>
                       <%# MODAL BUTTON %>
                       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
                         More info
@@ -301,7 +307,13 @@
                                     </div>
                                     <br>
 
-                                    <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
+                                    <% if offer.start_date > Date.today%>
+                                      <h6>Days until start: <%= (offer.start_date - Date.today).to_i %></h6>
+                                    <% elsif Date.today < offer.end_date %>
+                                      <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
+                                    <% else %>
+                                      <h6>Rent completed</h6>
+                                    <% end %>
                                   </div>
                                   <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
                                 </div>
