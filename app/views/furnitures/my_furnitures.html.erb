@@ -9,10 +9,10 @@
               <h5 class="card-title"><%= furniture.name %></h5>
             </div>
             <div class="col-6">
-              <h5 class="card-title">$<%= furniture.price %></h5>
+              <h5 class="card-title"><%=humanized_money_with_symbol(furniture.price_cents)%>/day</h5>
             </div>
             <div class="col-6">
-              <h5 class="card-title">$<%= furniture.description %></h5>
+              <h5 class="card-title"><%= furniture.description %></h5>
             </div>
           </div>
           <div class="row">
