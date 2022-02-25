@@ -105,7 +105,7 @@
                       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#i<%=offer.id%>">
                         More info
                       </button>
-                      <% if offer.accepted == true %>
+                      <% if offer.accepted == true && offer.paid == false %>
                         <%= form_tag orders_path do %>
                           <%= hidden_field_tag '@furniture_id', offer.furniture_id %>
                           <%= submit_tag 'Purchase', class: 'btn btn-secondary mt-2 mb-1' %>
