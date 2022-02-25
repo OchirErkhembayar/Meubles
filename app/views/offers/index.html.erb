@@ -60,7 +60,7 @@
 
                                     <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                                   </div>
-                                  <h2 class="card-trip-pricing">humanized_money_with_symbol(offer.furniture.price_cents * ((offer.end_date - offer.start_date).to_i)) %></h2>
+                                  <h2 class="card-trip-pricing"><%= humanized_money_with_symbol(offer.furniture.price_cents * ((offer.end_date - offer.start_date).to_i)) %></h2>
                                 </div>
                               </div>
                             </div>
