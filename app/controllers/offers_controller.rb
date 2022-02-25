@@ -46,6 +46,9 @@ class OffersController < ApplicationController
     price = (@offer.furniture.price * ((@offer.end_date - @offer.start_date).to_i.fdiv(7))).round(2)
     if current_user.balance >= price.to_f
       current_user.balance -= price.to_f
+      seller = User.find(@offer.furniture.user_id)
+      seller.balance += price.to_f
+      seller.save
       @offer.furniture.rented = true
       @offer.furniture.save
       current_user.user_history << @offer.furniture.user_id

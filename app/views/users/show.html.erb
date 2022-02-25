@@ -3,7 +3,8 @@
   <div class="row">
     <div class="col-12 col-sm-4 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">Furnitures I listed!</h3>
-      <% @furnitures.reverse.first(3).each do |furniture| %>
+      <% if @furnitures.first != nil %>
+        <% @furnitures.reverse.first(3).each do |furniture| %>
           <% if furniture.user_id == current_user.id %>
             <div class="card-trip my-2 mb-4" style="height: 400px;">
               <% if furniture.photo.attached? %>
@@ -16,7 +17,6 @@
                   <h2><%= furniture.name.capitalize %></h2>
                   <p><%= furniture.description.length < 100 ? furniture.description : furniture.description.first(100) + "..." %></p>
                 </div>
-
                 <h2 class="card-trip-pricing">£<%= furniture.price %></h2>
               </div>
               <div class="d-flex justify-content-center align-items-end">
@@ -26,6 +26,16 @@
             </div>
           <% end %>
         <% end %>
+      <% else %>
+        <% if @user == current_user %>
+          <div class="d-flex flex-column align-items-center">
+            <h6>No offers yet...</h6>
+            <%= link_to "Create your first offer!", new_furniture_path(@user), class: "btn btn-secondary w-100" %>
+          </div>
+        <% else %>
+          <h6><%= @user.first_name %> hasn't posted anything yet!</h6>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-12 col-sm-8 p-3">
       <h3 class="border-bottom py-3" style="text-align: center;">More about me</h3>

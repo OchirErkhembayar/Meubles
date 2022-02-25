@@ -4,6 +4,8 @@ class FurnituresController < ApplicationController
   def index
     if params[:query]
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
+    elsif params[:format]
+      @furnitures = Furniture.where('name iLIKE ?', "%#{params[:format]}%")
     else
       @furnitures = Furniture.all
 
