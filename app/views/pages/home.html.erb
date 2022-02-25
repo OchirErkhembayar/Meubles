@@ -79,7 +79,8 @@
                 </a>
                 <div class="card-body text-center">
                     <h4 class="card-title">Sofas</h4>
-                    <p class="text-muted">Starting from £40 per month</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">Find Sofas</a>
+                    <p class="text-muted">Starting from £40 per month</p>
+                    <%= link_to 'Find Sofas', furnitures_path("sofa"), class: "btn btn-outline-primary btn-sm", query: "query" %>
                 </div>
             </div>
         </div>
@@ -92,7 +93,8 @@
                 </a>
                 <div class="card-body text-center">
                     <h4 class="card-title">Treadmills</h4>
-                    <p class="text-muted">Starting from £50 per month</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">Find Treadmills</a>
+                    <p class="text-muted">Starting from £50 per month</p>
+                    <%= link_to 'Find Treatmills', furnitures_path("treadmill"), class: "btn btn-outline-primary btn-sm", query: "query" %>
                 </div>
             </div>
         </div>
@@ -106,7 +108,7 @@
                 <div class="card-body text-center">
                     <h4 class="card-title">Desks</h4>
                     <p class="text-muted">Starting from £9 per month</p>
-                    <%= link_to 'Find Desks', furnitures_path("desk"), class: "btn btn-outline-primary btn-sm" %>
+                    <%= link_to 'Find Desks', furnitures_path("desk"), class: "btn btn-outline-primary btn-sm", query: "query" %>
                 </div>
             </div>
         </div>

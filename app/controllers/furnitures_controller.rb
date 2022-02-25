@@ -6,8 +6,13 @@ class FurnituresController < ApplicationController
       @furnitures = Furniture.where('name iLIKE ?', "%#{params[:query]}%")
       @furnitures_mapped = Furniture.where('name iLIKE ?', "%#{params[:query]}%").geocoded
     elsif params[:format]
-      @furnitures = Furniture.all.select { |furn| furn.user_id == params[:format].to_i }
-      @furnitures_mapped = Furniture.all.select { |furn| furn.user_id == params[:format].to_i }.geocoded
+      if (Furniture.all.select { |furn| furn.user_id == params[:format].to_i }.size > 0)
+        @furnitures = Furniture.all.select { |furn| furn.user_id == params[:format].to_i }
+        @furnitures_mapped = @furnitures.geocoded
+      else
+        @furnitures = Furniture.where('name iLIKE ?', "%#{params[:format]}%")
+        @furnitures_mapped = @furnitures.geocoded
+      end
     else
       @furnitures = Furniture.all
       @furnitures_mapped = Furniture.geocoded
