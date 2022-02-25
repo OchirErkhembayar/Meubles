@@ -21,3 +21,21 @@ body {
   background: rgb(230, 230, 230);
 
 }
+
+.btn-secondary {
+  background-color: #8B62A6;
+}
+
+.btn-secondary:hover{
+  background-color: #ac7ace;
+}
+
+.btn-primary{
+  background-color: #8B62A6;
+  border-color:#8B62A6;
+}
+
+.btn-primary:hover {
+  background-color: #ac7ace;
+  border-color: #ac7ace;
+}
