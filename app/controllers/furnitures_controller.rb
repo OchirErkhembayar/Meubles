@@ -49,7 +49,7 @@ class FurnituresController < ApplicationController
 
   def update
     if @furniture.update(set_furniture)
-      redirect_to furnitures_path(@furniture)
+      redirect_to furnitures_path
     else
       render :edit
     end
@@ -68,7 +68,7 @@ class FurnituresController < ApplicationController
   private
 
   def set_furniture
-    params.require(:furniture).permit(:name, :price, :location, :category_id, :description, :photo)
+    params.require(:furniture).permit(:name, :location, :category_id, :description, :photo, :price_cents)
   end
 
   def find_furniture
