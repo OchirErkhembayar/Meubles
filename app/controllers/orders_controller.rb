@@ -1,15 +1,16 @@
 class OrdersController < ApplicationController
   def create
     @furniture = Furniture.find(params[:@furniture_id])
-    @order = Order.create!(furniture: @furniture, furnitures_sku: @furniture.name, amount: @furniture.price, state: 'pending', user: current_user)
+    @offer = Offer.find_by(furniture_id: params[:@furniture_id])
+    @order = Order.create!(furniture: @furniture, furnitures_sku: @furniture.name, amount: (@furniture.price_cents * ((@offer.end_date - @offer.start_date).to_i)), state: 'pending', user: current_user)
 
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
         name: @furniture.name,
         images: [@furniture.photo],
-        amount: @furniture.price_cents,
-        currency: 'eur',
+        amount: (@furniture.price_cents * ((@offer.end_date - @offer.start_date).to_i)),
+        currency: 'gbp',
         quantity: 1
       }],
       success_url: order_url(@order),
@@ -29,5 +30,6 @@ class OrdersController < ApplicationController
     @offer.save
     @offer.furniture.rented = true
     @offer.furniture.save
+    redirect_to offers_path
   end
 end
