@@ -98,7 +98,10 @@
                         More info
                       </button>
                       <% if offer.accepted == true %>
-                        <%= link_to 'Pay', paid_offer_path(offer), method: :put, class: "btn btn-secondary m-1" %>
+                        <%= form_tag orders_path do %>
+                          <%= hidden_field_tag '@furniture_id', offer.furniture_id %>
+                          <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+                        <% end %>
                       <% end %>
                       <%# MODAL %>
                       <div style="height: 700px;" class="modal fade" id="i<%=offer.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
