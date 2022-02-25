@@ -29,5 +29,6 @@ class OrdersController < ApplicationController
     @offer.save
     @offer.furniture.rented = true
     @offer.furniture.save
+    redirect_to offers_path
   end
 end

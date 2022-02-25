@@ -100,7 +100,7 @@
                       <% if offer.accepted == true %>
                         <%= form_tag orders_path do %>
                           <%= hidden_field_tag '@furniture_id', offer.furniture_id %>
-                          <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+                          <%= submit_tag 'Purchase', class: 'btn btn-secondary' %>
                         <% end %>
                       <% end %>
                       <%# MODAL %>
