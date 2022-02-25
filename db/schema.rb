@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2022_02_24_161055) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
+    t.integer "price_cents", default: 0, null: false
     t.boolean "rented", default: false
     t.float "latitude"
     t.float "longitude"
-    t.integer "price_cents", default: 0, null: false
     t.index ["category_id"], name: "index_furnitures_on_category_id"
     t.index ["user_id"], name: "index_furnitures_on_user_id"
   end
