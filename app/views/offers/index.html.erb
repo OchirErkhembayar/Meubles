@@ -56,7 +56,7 @@
 
                                     <h6>Days remaining: <%= (offer.end_date - Date.today).to_i %></h6>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
+                                  <h2 class="card-trip-pricing">humanized_money_with_symbol(offer.furniture.price_cents * ((offer.end_date - offer.start_date).to_i)) %></h2>
                                 </div>
                               </div>
                             </div>
@@ -100,7 +100,7 @@
                       <% if offer.accepted == true %>
                         <%= form_tag orders_path do %>
                           <%= hidden_field_tag '@furniture_id', offer.furniture_id %>
-                          <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+                          <%= submit_tag 'Purchase', class: 'btn btn-secondary mt-2 mb-1' %>
                         <% end %>
                       <% end %>
                       <%# MODAL %>
@@ -134,7 +134,7 @@
                                     <p>End date: <%= offer.end_date %></p>
                                     </div>
                                   </div>
-                                  <h2 class="card-trip-pricing">£<%= (offer.furniture.price * ((offer.end_date - offer.start_date).to_i.fdiv(7))).round(2) %></h2>
+                                  <h2 class="card-trip-pricing"><%= humanized_money_with_symbol(offer.furniture.price_cents * ((offer.end_date - offer.start_date).to_i)) %></h2>
                                 </div>
                               </div>
                             </div>
@@ -142,8 +142,6 @@
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                               <% if offer.accepted == false %>
                                 <%= link_to 'Cancel offer', offer_path(offer), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary" %>
-                              <% else %>
-                                <%= link_to 'Pay', paid_offer_path(offer), method: :put, class: "btn btn-secondary" %>
                               <% end %>
                             </div>
                           </div>
